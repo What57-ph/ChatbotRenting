@@ -1,4 +1,4 @@
-package com.chatbot_renting.commonservice.exception;
+package com.lecturemind.commonservice.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

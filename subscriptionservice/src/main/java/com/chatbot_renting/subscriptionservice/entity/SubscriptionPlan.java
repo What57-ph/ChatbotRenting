@@ -38,6 +38,8 @@ public class SubscriptionPlan extends BaseEntity {
 
     private Long maxMonthlyTokens;
 
+    private Integer duration; //month
+
     private Boolean active = true;
 
     @OneToMany(

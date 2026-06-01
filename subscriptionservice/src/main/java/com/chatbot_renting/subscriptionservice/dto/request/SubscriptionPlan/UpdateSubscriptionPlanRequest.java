@@ -34,6 +34,9 @@ public class UpdateSubscriptionPlanRequest {
 
     private Boolean active;
 
+    private Integer duration;
+
+
     @Valid
     private List<CreatePlanFeatureRequest> features;
 }

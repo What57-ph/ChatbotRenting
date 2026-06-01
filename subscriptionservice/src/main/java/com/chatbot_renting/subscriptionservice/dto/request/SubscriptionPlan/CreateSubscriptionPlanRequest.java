@@ -40,6 +40,8 @@ public class CreateSubscriptionPlanRequest {
 
     private Long maxMonthlyTokens;
 
+    private Integer duration;
+
     @Valid
     private List<CreatePlanFeatureRequest> features;
 }
