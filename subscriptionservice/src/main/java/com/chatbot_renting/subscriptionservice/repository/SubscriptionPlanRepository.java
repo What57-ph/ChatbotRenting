@@ -2,18 +2,12 @@ package com.chatbot_renting.subscriptionservice.repository;
 
 import com.chatbot_renting.subscriptionservice.entity.SubscriptionPlan;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface SubscriptionPlanRepository
-        extends JpaRepository<SubscriptionPlan, Long> {
-
-    boolean existsByCode(String code);
-
-    Optional<SubscriptionPlan> findByCode(String code);
-
+@Repository
+public interface SubscriptionPlanRepository extends JpaRepository<SubscriptionPlan, Long> {
     List<SubscriptionPlan> findByActiveTrue();
-
-    boolean existsByIdAndActiveTrue(Long id);
+    boolean existsByCode(String code);
 }

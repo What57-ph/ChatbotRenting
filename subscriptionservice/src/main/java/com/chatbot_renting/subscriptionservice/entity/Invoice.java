@@ -2,37 +2,55 @@ package com.chatbot_renting.subscriptionservice.entity;
 
 import com.chatbot_renting.subscriptionservice.entity.enums.InvoiceStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "invoices")
-@Getter
-@Setter
+@Data
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "invoices")
 public class Invoice extends BaseEntity {
 
-    @Column(unique = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
+
+    @Column(nullable = false, unique = true)
     private String invoiceNumber;
 
-    private BigDecimal amount;
+    @Column(nullable = false)
+    private Double amount;
 
-    private String currency;
+    @Column(nullable = false)
+    @Builder.Default
+    private String currency = "VND";
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private InvoiceStatus status;
 
+    @Column(nullable = false)
     private LocalDateTime issuedAt;
 
     private LocalDateTime paidAt;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", unique = true)
-    private Order order;
+    @Column(nullable = false, columnDefinition = "timestamp(6) default CURRENT_TIMESTAMP")
+    private LocalDateTime dueDate;
+
+    private String paymentMethod;
+
+    private String paymentReference;
+
+    private String notes;
+
+    /**
+     * JSON snapshot của SubscriptionPlan tại thời điểm xuất hoá đơn.
+     */
+    @Column(columnDefinition = "TEXT")
+    private String planSnapshot;
 }

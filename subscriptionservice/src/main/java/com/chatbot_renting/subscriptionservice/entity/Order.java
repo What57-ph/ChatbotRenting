@@ -2,49 +2,53 @@ package com.chatbot_renting.subscriptionservice.entity;
 
 import com.chatbot_renting.subscriptionservice.entity.enums.BillingCycle;
 import com.chatbot_renting.subscriptionservice.entity.enums.OrderStatus;
+import com.chatbot_renting.subscriptionservice.entity.enums.OrderType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import java.math.BigDecimal;
-
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "orders")
-@Getter
-@Setter
+@Data
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "orders")
 public class Order extends BaseEntity {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subscription_id", nullable = false)
+    private Subscription subscription;
 
     @Column(nullable = false)
     private Long userId;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String orderNumber;
 
-    private BigDecimal amount;
+    @Column(nullable = false)
+    private Double amount;
 
-    private String currency;
+    @Column(nullable = false)
+    @Builder.Default
+    private String currency = "VND";
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'MONTHLY'")
     private BillingCycle billingCycle;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private OrderStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subscription_id")
-    private Subscription subscription;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'NEW_SUBSCRIPTION'")
+    private OrderType orderType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plan_id")
-    private SubscriptionPlan plan;
-
-    @OneToOne(
-            mappedBy = "order",
-            cascade = CascadeType.ALL
-    )
-    private Invoice invoice;
+    /**
+     * JSON snapshot của SubscriptionPlan tại thời điểm mua.
+     * Đảm bảo dữ liệu kế toán không bị ảnh hưởng khi plan thay đổi về sau.
+     */
+    @Column(columnDefinition = "TEXT")
+    private String planSnapshot;
 }

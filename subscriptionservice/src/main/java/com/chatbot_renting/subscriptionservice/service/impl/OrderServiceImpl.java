@@ -1,168 +1,73 @@
 package com.chatbot_renting.subscriptionservice.service.impl;
 
-import com.chatbot_renting.subscriptionservice.dto.request.Order.CreateOrderRequest;
-import com.chatbot_renting.subscriptionservice.dto.request.Order.UpdateOrderStatusRequest;
-import com.chatbot_renting.subscriptionservice.dto.response.OrderResponse;
-import com.chatbot_renting.subscriptionservice.entity.*;
+import com.chatbot_renting.commonservice.exception.AppError;
+import com.chatbot_renting.commonservice.exception.AppNotFoundException;
+import com.chatbot_renting.subscriptionservice.dto.response.OrderDto;
+import com.chatbot_renting.subscriptionservice.dto.response.PagedResponse;
+import com.chatbot_renting.subscriptionservice.entity.Order;
 import com.chatbot_renting.subscriptionservice.entity.enums.OrderStatus;
-import com.chatbot_renting.subscriptionservice.entity.enums.SubscriptionStatus;
+import com.chatbot_renting.subscriptionservice.exception.code.SubscriptionErrorCode;
 import com.chatbot_renting.subscriptionservice.mapper.OrderMapper;
-import com.chatbot_renting.subscriptionservice.repository.*;
-import com.chatbot_renting.subscriptionservice.service.InvoiceService;
+import com.chatbot_renting.subscriptionservice.repository.OrderRepository;
 import com.chatbot_renting.subscriptionservice.service.OrderService;
-import com.chatbot_renting.subscriptionservice.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-    private final SubscriptionRepository subscriptionRepository;
-    private final SubscriptionPlanRepository planRepository;
-    private final InvoiceRepository invoiceRepository;
     private final OrderMapper orderMapper;
-    private final SubscriptionService subscriptionService;
-    private final InvoiceService invoiceService;
 
     @Override
-    @Transactional
-    public OrderResponse createOrder(CreateOrderRequest request) {
+    public PagedResponse<OrderDto> getUserOrders(Long userId, int page, int limit, String status) {
+        log.info("Starting getUserOrders - userId={}, page={}, limit={}, status={}", userId, page, limit, status);
+        try {
+            Page<Order> orderPage;
+            if (status != null && !status.isEmpty()) {
+                OrderStatus orderStatus = OrderStatus.valueOf(status.toUpperCase());
+                orderPage = orderRepository.findByUserIdAndStatusOrderByCreatedAtDesc(
+                        userId, orderStatus, PageRequest.of(page - 1, limit));
+            } else {
+                orderPage = orderRepository.findByUserIdOrderByCreatedAtDesc(
+                        userId, PageRequest.of(page - 1, limit));
+            }
 
-        SubscriptionPlan plan = planRepository.findById(request.getPlanId())
-                .orElseThrow(() -> new RuntimeException("Plan not found"));
+            List<OrderDto> dtoList = orderPage.getContent().stream()
+                    .map(orderMapper::toDto)
+                    .collect(Collectors.toList());
 
-        Order order = new Order();
-        order.setUserId(request.getUserId());
-        order.setPlan(plan);
-        order.setBillingCycle(request.getBillingCycle());
-
-        order.setStatus(OrderStatus.PENDING);
-        order.setOrderNumber(generateOrderNumber());
-
-        order.setAmount(request.getAmount());
-
-        return orderMapper.toResponse(orderRepository.save(order));
-    }
-
-    @Override
-    @Transactional
-    public OrderResponse payOrder(Long orderId, Long userId) {
-
-        Order order = getOrderOrThrow(orderId);
-
-        validateTransition(order.getStatus(), OrderStatus.PAID);
-
-        order.setStatus(OrderStatus.PAID);
-        order.setCurrency("VND");
-
-        Subscription subscription = subscriptionService.createSubscription(order, userId);
-        Invoice invoice = invoiceService.createInvoice(order);
-
-        order.setSubscription(subscription);
-        orderRepository.save(order);
-
-        OrderResponse response = orderMapper.toResponse(order);
-        response.setInvoiceId(invoice.getId());
-        response.setSubscriptionId(subscription.getId());
-        return response;
-    }
-
-    @Override
-    @Transactional
-    public OrderResponse cancelOrder(Long orderId, String reason) {
-
-        Order order = getOrderOrThrow(orderId);
-
-        validateTransition(order.getStatus(), OrderStatus.CANCELLED);
-
-        order.setStatus(OrderStatus.CANCELLED);
-
-        return orderMapper.toResponse(orderRepository.save(order));
-    }
-
-    @Override
-    @Transactional
-    public OrderResponse failOrder(Long orderId, String reason) {
-
-        Order order = getOrderOrThrow(orderId);
-
-        validateTransition(order.getStatus(), OrderStatus.FAILED);
-
-        order.setStatus(OrderStatus.FAILED);
-
-        return orderMapper.toResponse(orderRepository.save(order));
-    }
-
-    @Override
-    @Transactional
-    public OrderResponse refundOrder(Long orderId, String reason) {
-
-        Order order = getOrderOrThrow(orderId);
-
-        if (order.getStatus() != OrderStatus.PAID) {
-            throw new IllegalStateException("Only PAID order can be refunded");
-        }
-
-        order.setStatus(OrderStatus.REFUNDED);
-
-        invoiceService.markRefund(order.getInvoice());
-
-        subscriptionService.revokeSubscription(order.getSubscription());
-
-        return orderMapper.toResponse(orderRepository.save(order));
-    }
-
-
-    @Override
-    public OrderResponse getOrder(Long orderId) {
-
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
-
-        return orderMapper.toResponse(order);
-    }
-
-    @Override
-    public List<OrderResponse> getAllOrder(Pageable pageable) {
-        return orderRepository.findAll(pageable)
-                .stream()
-                .map(orderMapper::toResponse)
-                .toList();
-    }
-
-    @Override
-    public List<OrderResponse> getOrdersByUser(Long userId) {
-
-        return orderRepository.findByUserId(userId)
-                .stream()
-                .map(orderMapper::toResponse)
-                .toList();
-    }
-
-    private void validateTransition(OrderStatus current, OrderStatus next) {
-
-        if (current == OrderStatus.CANCELLED) {
-            throw new IllegalStateException("Order already canceled");
-        }
-
-        if (current == OrderStatus.PAID && next == OrderStatus.PENDING) {
-            throw new IllegalStateException("Cannot revert PAID to PENDING");
+            PagedResponse<OrderDto> response = new PagedResponse<>(
+                    dtoList, new PagedResponse.Pagination(page, limit, orderPage.getTotalElements()));
+            log.info("Completed getUserOrders - userId={}, total={}", userId, orderPage.getTotalElements());
+            return response;
+        } catch (Exception e) {
+            log.error("Error in getUserOrders - userId={}", userId, e);
+            throw e;
         }
     }
 
-    private String generateOrderNumber() {
-        return "ORD-" + System.currentTimeMillis();
+    @Override
+    public OrderDto getOrder(Long userId, Long orderId) {
+        log.info("Starting getOrder - userId={}, orderId={}", userId, orderId);
+        try {
+            Order order = orderRepository.findById(orderId)
+                    .filter(o -> o.getUserId().equals(userId))
+                    .orElseThrow(() -> new AppNotFoundException(new AppError(SubscriptionErrorCode.ORDER_NOT_FOUND)));
+            OrderDto dto = orderMapper.toDto(order);
+            log.info("Completed getOrder - userId={}, orderId={}", userId, orderId);
+            return dto;
+        } catch (Exception e) {
+            log.error("Error in getOrder - userId={}, orderId={}", userId, orderId, e);
+            throw e;
+        }
     }
-
-    private Order getOrderOrThrow(Long orderId) {
-        return orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
-    }
-
 }

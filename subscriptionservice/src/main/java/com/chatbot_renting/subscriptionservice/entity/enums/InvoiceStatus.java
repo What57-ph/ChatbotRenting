@@ -1,8 +1,8 @@
 package com.chatbot_renting.subscriptionservice.entity.enums;
 
 public enum InvoiceStatus {
-    PENDING,
+    UNPAID,
     PAID,
     FAILED,
-    REFUNDED
+    CANCELLED
 }

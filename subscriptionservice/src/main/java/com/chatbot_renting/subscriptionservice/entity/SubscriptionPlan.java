@@ -1,24 +1,26 @@
 package com.chatbot_renting.subscriptionservice.entity;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "subscription_plans")
-@Getter
-@Setter
+@Data
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "subscription_plans")
 public class SubscriptionPlan extends BaseEntity {
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String code;
 
     @Column(nullable = false)
@@ -26,29 +28,26 @@ public class SubscriptionPlan extends BaseEntity {
 
     private String description;
 
-    private BigDecimal monthlyPrice;
-
-    private BigDecimal yearlyPrice;
-
+    @Column(nullable = false)
     private Integer maxChatbots;
 
-    private Integer maxFiles;
-
+    @Column(nullable = false)
     private Integer maxStorageMb;
 
-    private Long maxMonthlyTokens;
+    @Column(nullable = false)
+    private Integer maxMonthlyTokens;
 
-    private Integer duration; //month
+    private Integer durationMonths;
 
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    @Builder.Default
     private Boolean active = true;
 
-    @OneToMany(
-            mappedBy = "plan",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<PlanFeature> features = new ArrayList<>();
+    @Column(nullable = false, columnDefinition = "integer default 0")
+    @Builder.Default
+    private Integer trialDays = 0;
 
-    @OneToMany(mappedBy = "plan")
-    private List<Subscription> subscriptions = new ArrayList<>();
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<PlanFeature> features = new ArrayList<>();
 }
