@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+import java.util.List;
+import com.chatbot_renting.notificationservice.dto.response.PreferenceResponse;
+
 @RestController
 @RequiredArgsConstructor
 public class ClientPreferenceController implements ClientPreferenceApi {
@@ -18,10 +21,10 @@ public class ClientPreferenceController implements ClientPreferenceApi {
     private final SecurityUtils securityUtils;
 
     @Override
-    public ResponseEntity<Object> getPreferences() {
+    public ResponseEntity<List<PreferenceResponse>> getPreferences() {
         UUID userId = securityUtils.getCurrentUserId();
-        // Return dummy preferences summary
-        return ResponseEntity.ok().build();
+        List<PreferenceResponse> preferences = notificationService.getUserPreferences(userId);
+        return ResponseEntity.ok(preferences);
     }
 
     @Override

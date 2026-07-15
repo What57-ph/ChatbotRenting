@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.chatbot_renting.notificationservice.dto.response.NotificationTimelineResponse;
+
 @RestController
 @RequiredArgsConstructor
 public class ClientNotificationController implements ClientNotificationApi {
@@ -17,10 +22,13 @@ public class ClientNotificationController implements ClientNotificationApi {
     private final SecurityUtils securityUtils;
 
     @Override
-    public ResponseEntity<Object> getTimeline() {
+    public ResponseEntity<Page<NotificationTimelineResponse>> getTimeline(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
         UUID userId = securityUtils.getCurrentUserId();
-        // Return dummy implementation list
-        return ResponseEntity.ok().build();
+        Page<NotificationTimelineResponse> timeline = notificationService.getTimeline(userId, PageRequest.of(page, size));
+        return ResponseEntity.ok(timeline);
     }
 
     @Override

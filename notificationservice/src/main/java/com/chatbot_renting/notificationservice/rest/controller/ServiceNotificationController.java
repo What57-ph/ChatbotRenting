@@ -27,7 +27,8 @@ public class ServiceNotificationController implements ServiceNotificationApi {
 
     @Override
     public ResponseEntity<Void> broadcastNotification(BroadcastRequest request) {
-        notificationService.broadcastNotification(request.getTemplateCode(), request.getContextData(), request.getActorId());
+        notificationService.broadcastNotification(request.getTemplateCode(), request.getContextData(),
+                request.getActorId());
         return ResponseEntity.ok().build();
     }
 
@@ -39,7 +40,8 @@ public class ServiceNotificationController implements ServiceNotificationApi {
 
     @Override
     public ResponseEntity<Void> sendDirectZalo(DirectZaloRequest request) {
-        notificationService.sendDirectZalo(request.getZaloIdentifier(), request.getZaloTemplateId(), request.getContextData());
+        notificationService.sendDirectZalo(request.getZaloIdentifier(), request.getZaloTemplateId(),
+                request.getContextData());
         return ResponseEntity.ok().build();
     }
 }

@@ -1,10 +1,9 @@
 package com.chatbot_renting.notificationservice.rest.api;
 
+import com.chatbot_renting.notificationservice.dto.response.NotificationTimelineResponse;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -12,7 +11,10 @@ import java.util.UUID;
 public interface ClientNotificationApi {
 
     @GetMapping
-    ResponseEntity<Object> getTimeline(); // Placeholder for paginated DTO
+    ResponseEntity<Page<NotificationTimelineResponse>> getTimeline(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    );
 
     @GetMapping("/unread-count")
     ResponseEntity<Long> getUnreadCount();
