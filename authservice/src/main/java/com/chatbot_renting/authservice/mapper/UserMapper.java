@@ -1,6 +1,6 @@
-package com.lecture_mind.authservice.mapper;
+package com.chatbot_renting.authservice.mapper;
 
-import com.lecture_mind.authservice.model.User;
+import com.chatbot_renting.authservice.entity.User;
 import com.lecturemind.commonservice.domain.Request.ReqLoginDTO;
 import com.lecturemind.commonservice.domain.Response.ResLoginDTO;
 import org.mapstruct.Mapper;
@@ -11,7 +11,7 @@ public interface UserMapper {
     @Mapping(target = "userLogin.id", source = "id")
     @Mapping(target = "userLogin.email", source = "email")
     @Mapping(target = "userLogin.fullName", source = "fullName")
-    @Mapping(target = "userLogin.roles", expression = "java(user.getRoles().stream().map(role -> role.getName()).toList())",ignore = true)
+    @Mapping(target = "userLogin.roles", expression = "java(user.getRoles().stream().map(role -> role.getName()).toList())", ignore = true)
     ResLoginDTO toLoginResponse(User user);
 
     ReqLoginDTO toLoginRequest(User user);

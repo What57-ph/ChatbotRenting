@@ -1,4 +1,4 @@
-package com.lecture_mind.authservice.service;
+package com.chatbot_renting.authservice.service.impl;
 
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.stereotype.Service;

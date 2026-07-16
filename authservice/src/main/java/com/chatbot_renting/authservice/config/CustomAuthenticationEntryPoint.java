@@ -1,8 +1,8 @@
-package com.lecture_mind.authservice.config;
+package com.chatbot_renting.authservice.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper; // Sửa lại package chuẩn của Jackson
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.lecturemind.commonservice.domain.Response.ResponseBuilder; // Giả định class này trả về Object hoặc String
+import com.lecturemind.commonservice.domain.Response.ResponseBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

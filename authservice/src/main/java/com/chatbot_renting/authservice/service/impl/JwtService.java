@@ -1,11 +1,10 @@
-package com.lecture_mind.authservice.service;
+package com.chatbot_renting.authservice.service.impl;
 
-import com.lecture_mind.authservice.config.JwtUtil;
-import com.lecture_mind.authservice.model.TokenType;
-import com.lecture_mind.authservice.model.User;
+import com.chatbot_renting.authservice.config.JwtUtil;
+import com.chatbot_renting.authservice.entity.TokenType;
+import com.chatbot_renting.authservice.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.time.DateUtils;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,6 @@ import java.util.Date;
 @Service
 @RequiredArgsConstructor
 public class JwtService {
-    private final AuthenticationManager authenticationManager;
     private final CustomUserDetailService customUserDetailService;
     private final JwtUtil jwtUtil;
 
@@ -25,6 +23,4 @@ public class JwtService {
                 : DateUtils.addDays(new Date(), 30);
         return jwtUtil.generateToken(userDetails, expiration);
     }
-
-
 }

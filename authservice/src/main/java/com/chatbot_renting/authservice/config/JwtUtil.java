@@ -1,24 +1,21 @@
-package com.lecture_mind.authservice.config;
+package com.chatbot_renting.authservice.config;
 
-import com.lecture_mind.authservice.model.User;
-import com.lecture_mind.authservice.repository.UserRepository;
+import com.chatbot_renting.authservice.entity.User;
+import com.chatbot_renting.authservice.repository.UserRepository;
 import io.jsonwebtoken.*;
-
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.SecretKey;
-
 import java.security.Key;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Function;
 
 @Component
@@ -30,25 +27,30 @@ public class JwtUtil {
 
     private final UserRepository userRepository;
 
-    private Key getSecretKey(){
+    private Key getSecretKey() {
         byte[] keyBytes = Decoders.BASE64.decode(this.secret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-    public String extractUsername(String token){return extractClaim(token, Claims::getSubject);}
-    public Long extractUserId(String token){
-        return extractClaim(token, claims -> claims.get("userId", Long.class));
+
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
     }
+
+    public UUID extractUserId(String token) {
+        return extractClaim(token, claims -> UUID.fromString(claims.get("userId", String.class)));
+    }
+
     public List<?> extractRoles(String token) {
         return extractClaim(token, claims -> claims.get("roles", List.class));
     }
 
-    public Boolean isTokenValid(String token){
+    public Boolean isTokenValid(String token) {
         Claims claims = extractAllClaims(token);
         return !claims.getExpiration().before(new Date());
     }
 
     public boolean validateToken(String token) {
-        log.debug(">>>>Token when validate: "+token);
+        log.debug(">>>>Token when validate: " + token);
         try {
             Jwts.parserBuilder()
                     .setSigningKey(getSecretKey())
@@ -60,7 +62,7 @@ public class JwtUtil {
         }
     }
 
-    public String generateToken(UserDetails userDetails, Date expiration){
+    public String generateToken(UserDetails userDetails, Date expiration) {
 
         User user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow();
@@ -68,14 +70,14 @@ public class JwtUtil {
         return Jwts.builder()
                 .setSubject(user.getEmail())
                 .claim("roles", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
-                .claim("userId", user.getId())
+                .claim("userId", user.getId().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(expiration)
                 .signWith(getSecretKey())
                 .compact();
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> resolver){
+    public <T> T extractClaim(String token, Function<Claims, T> resolver) {
         return resolver.apply(
                 Jwts.parserBuilder()
                         .setSigningKey(getSecretKey())

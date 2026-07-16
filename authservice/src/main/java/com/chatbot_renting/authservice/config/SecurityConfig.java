@@ -1,8 +1,8 @@
-package com.lecture_mind.authservice.config;
+package com.chatbot_renting.authservice.config;
 
-import com.lecture_mind.authservice.service.CustomUserDetailService;
-import com.lecture_mind.authservice.service.OAuth2LoginSuccessHandler;
-import com.lecture_mind.authservice.service.OAuth2UserService;
+import com.chatbot_renting.authservice.service.impl.CustomUserDetailService;
+import com.chatbot_renting.authservice.service.impl.OAuth2LoginSuccessHandler;
+import com.chatbot_renting.authservice.service.impl.OAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,18 +26,18 @@ public class SecurityConfig {
     private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
-                                                   CustomAuthenticationEntryPoint customAuthenticationEntryPoint) throws Exception{
+                                                   CustomAuthenticationEntryPoint customAuthenticationEntryPoint) throws Exception {
         return http
                 .exceptionHandling(customizer ->
                         customizer.authenticationEntryPoint(customAuthenticationEntryPoint))
@@ -47,12 +47,6 @@ public class SecurityConfig {
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
-//                .oauth2Login(oauth2 -> oauth2.disable()
-////                        .loginPage("/api/v1/auth/login")
-////                        .userInfoEndpoint(userInfo -> userInfo
-////                                .userService(oAuth2UserService))
-////                        .successHandler(oAuth2LoginSuccessHandler)
-//                )
                 .formLogin(f -> f.disable())
                 .httpBasic(basic -> basic.disable())
                 .sessionManagement(session ->

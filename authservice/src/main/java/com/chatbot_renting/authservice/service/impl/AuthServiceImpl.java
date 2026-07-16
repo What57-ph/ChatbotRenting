@@ -1,12 +1,13 @@
-package com.lecture_mind.authservice.service;
+package com.chatbot_renting.authservice.service.impl;
 
-import com.lecture_mind.authservice.config.JwtUtil;
-import com.lecture_mind.authservice.model.Role;
-import com.lecture_mind.authservice.model.RoleType;
-import com.lecture_mind.authservice.model.TokenType;
-import com.lecture_mind.authservice.model.User;
-import com.lecture_mind.authservice.repository.RoleRepository;
-import com.lecture_mind.authservice.repository.UserRepository;
+import com.chatbot_renting.authservice.config.JwtUtil;
+import com.chatbot_renting.authservice.entity.Role;
+import com.chatbot_renting.authservice.entity.RoleType;
+import com.chatbot_renting.authservice.entity.TokenType;
+import com.chatbot_renting.authservice.entity.User;
+import com.chatbot_renting.authservice.repository.RoleRepository;
+import com.chatbot_renting.authservice.repository.UserRepository;
+import com.chatbot_renting.authservice.service.AuthService;
 import com.lecturemind.commonservice.domain.Request.LogoutRequest;
 import com.lecturemind.commonservice.domain.Request.RefreshTokenRequest;
 import com.lecturemind.commonservice.domain.Request.ReqLoginDTO;
@@ -27,7 +28,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AuthService {
+public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -35,8 +36,10 @@ public class AuthService {
     private final JwtService jwtService;
     private final JwtUtil jwtUtil;
 
+    @Override
     @Transactional
     public void signup(SignupRequest request) {
+        log.info("Processing signup for email: {}", request.getEmail());
 
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new ExistException("Email already exists");
@@ -55,10 +58,13 @@ public class AuthService {
                 .build();
 
         userRepository.save(user);
+        log.info("Signup completed for email: {}", request.getEmail());
     }
 
+    @Override
     @Transactional
     public ResLoginDTO login(ReqLoginDTO reqLoginDTO) throws Exception {
+        log.info("Processing login for email: {}", reqLoginDTO.getEmail());
 
         User user = userRepository.findByEmail(reqLoginDTO.getEmail())
                 .orElseThrow(() -> new NotFoundException("User not found"));
@@ -73,10 +79,13 @@ public class AuthService {
         user.setRefreshToken(refreshToken);
         userRepository.save(user);
 
+        log.info("Login successful for email: {}", reqLoginDTO.getEmail());
         return buildLoginResponse(user, accessToken, refreshToken);
     }
 
+    @Override
     public ResLoginDTO refreshToken(RefreshTokenRequest request) throws Exception {
+        log.info("Processing refresh token");
 
         if (!jwtUtil.validateToken(request.getRefreshToken())) {
             throw new UnauthorizedException("Invalid refresh token");
@@ -89,10 +98,13 @@ public class AuthService {
 
         String newAccessToken = jwtService.createJwtToken(user, TokenType.ACCESS);
 
+        log.info("Refresh token successful for email: {}", email);
         return buildLoginResponse(user, newAccessToken, request.getRefreshToken());
     }
 
+    @Override
     public void logout(LogoutRequest logoutRequest) {
+        log.info("Processing logout");
 
         if (logoutRequest == null || logoutRequest.getRefreshToken() == null) {
             throw new AuthException("Refresh token is required");
@@ -107,6 +119,7 @@ public class AuthService {
 
         user.setRefreshToken(null);
         userRepository.save(user);
+        log.info("Logout successful");
     }
 
     private ResLoginDTO buildLoginResponse(User user, String accessToken, String refreshToken) {
