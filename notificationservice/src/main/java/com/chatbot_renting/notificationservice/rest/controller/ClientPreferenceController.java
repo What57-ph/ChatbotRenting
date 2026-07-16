@@ -2,7 +2,7 @@ package com.chatbot_renting.notificationservice.rest.controller;
 
 import com.chatbot_renting.notificationservice.dto.request.PreferenceUpdateRequest;
 import com.chatbot_renting.notificationservice.rest.api.ClientPreferenceApi;
-import com.chatbot_renting.notificationservice.service.NotificationService;
+import com.chatbot_renting.notificationservice.service.ClientPreferenceService;
 import com.chatbot_renting.notificationservice.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import com.chatbot_renting.notificationservice.dto.response.PreferenceResponse;
 @RequiredArgsConstructor
 public class ClientPreferenceController implements ClientPreferenceApi {
 
-    private final NotificationService notificationService;
+    private final ClientPreferenceService notificationService;
     private final SecurityUtils securityUtils;
 
     @Override

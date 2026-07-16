@@ -1,4 +1,4 @@
-package main.java.com.chatbot_renting.notificationservice.event;
+package com.chatbot_renting.notificationservice.event;
 
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;

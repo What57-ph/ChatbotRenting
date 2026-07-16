@@ -5,7 +5,7 @@ import com.chatbot_renting.notificationservice.dto.request.DirectEmailRequest;
 import com.chatbot_renting.notificationservice.dto.request.DirectZaloRequest;
 import com.chatbot_renting.notificationservice.dto.request.NotificationSendRequest;
 import com.chatbot_renting.notificationservice.rest.api.ServiceNotificationApi;
-import com.chatbot_renting.notificationservice.service.NotificationService;
+import com.chatbot_renting.notificationservice.service.ServiceNotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ServiceNotificationController implements ServiceNotificationApi {
 
-    private final NotificationService notificationService;
+    private final ServiceNotificationService notificationService;
 
     @Override
     public ResponseEntity<UUID> dispatchNotification(NotificationSendRequest request) {

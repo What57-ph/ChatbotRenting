@@ -1,7 +1,7 @@
 package com.chatbot_renting.notificationservice.rest.controller;
 
 import com.chatbot_renting.notificationservice.rest.api.ClientNotificationApi;
-import com.chatbot_renting.notificationservice.service.NotificationService;
+import com.chatbot_renting.notificationservice.service.ClientNotificationService;
 import com.chatbot_renting.notificationservice.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import com.chatbot_renting.notificationservice.dto.response.NotificationTimeline
 @RequiredArgsConstructor
 public class ClientNotificationController implements ClientNotificationApi {
 
-    private final NotificationService notificationService;
+    private final ClientNotificationService notificationService;
     private final SecurityUtils securityUtils;
 
     @Override
@@ -39,7 +39,8 @@ public class ClientNotificationController implements ClientNotificationApi {
 
     @Override
     public ResponseEntity<Void> markAsRead(UUID id) {
-        notificationService.markAsRead(id);
+        UUID userId = securityUtils.getCurrentUserId();
+        notificationService.markAsRead(userId, id);
         return ResponseEntity.ok().build();
     }
 

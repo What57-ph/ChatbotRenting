@@ -1,4 +1,4 @@
-package main.java.com.chatbot_renting.notificationservice.dispatch;
+package com.chatbot_renting.notificationservice.dispatch;
 
 import java.util.UUID;
 
