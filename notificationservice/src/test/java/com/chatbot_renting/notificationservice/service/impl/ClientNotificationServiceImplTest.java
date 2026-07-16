@@ -63,7 +63,7 @@ public class ClientNotificationServiceImplTest {
 
     @Test
     void getTimeline_ShouldReturnPagedResponse() {
-        when(recipientRepository.findTimelineByRecipientId(eq(userId), any(Pageable.class)))
+        when(recipientRepository.findByRecipientIdOrderByPayloadCreatedAtDesc(eq(userId), any(Pageable.class)))
                 .thenReturn(new PageImpl<>(Collections.singletonList(recipient)));
 
         Page<NotificationTimelineResponse> timeline = clientNotificationService.getTimeline(userId, Pageable.unpaged());
@@ -109,10 +109,16 @@ public class ClientNotificationServiceImplTest {
     }
 
     @Test
-    void markAllAsRead_ShouldInvokeRepositoryMethod() {
+    void markAllAsRead_ShouldFetchUnreadAndSaveAll() {
+        when(recipientRepository.findByRecipientIdAndIsReadFalse(userId))
+                .thenReturn(Collections.singletonList(recipient));
+
         clientNotificationService.markAllAsRead(userId);
 
-        verify(recipientRepository, times(1)).markAllAsRead(userId);
+        assertTrue(recipient.getIsRead());
+        assertNotNull(recipient.getReadAt());
+        verify(recipientRepository, times(1)).findByRecipientIdAndIsReadFalse(userId);
+        verify(recipientRepository, times(1)).saveAll(any());
     }
 
     @Test

@@ -2,7 +2,6 @@ package com.chatbot_renting.notificationservice.rest.api;
 
 import com.chatbot_renting.notificationservice.dto.request.BroadcastRequest;
 import com.chatbot_renting.notificationservice.dto.request.DirectEmailRequest;
-import com.chatbot_renting.notificationservice.dto.request.DirectZaloRequest;
 import com.chatbot_renting.notificationservice.dto.request.NotificationSendRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,4 @@ public interface ServiceNotificationApi {
 
     @PostMapping("/direct-email")
     ResponseEntity<Void> sendDirectEmail(@Valid @RequestBody DirectEmailRequest request);
-
-    @PostMapping("/direct-zalo")
-    ResponseEntity<Void> sendDirectZalo(@Valid @RequestBody DirectZaloRequest request);
 }

@@ -2,7 +2,6 @@ package com.chatbot_renting.notificationservice.rest.controller;
 
 import com.chatbot_renting.notificationservice.dto.request.BroadcastRequest;
 import com.chatbot_renting.notificationservice.dto.request.DirectEmailRequest;
-import com.chatbot_renting.notificationservice.dto.request.DirectZaloRequest;
 import com.chatbot_renting.notificationservice.dto.request.NotificationSendRequest;
 import com.chatbot_renting.notificationservice.rest.api.ServiceNotificationApi;
 import com.chatbot_renting.notificationservice.service.ServiceNotificationService;
@@ -35,13 +34,6 @@ public class ServiceNotificationController implements ServiceNotificationApi {
     @Override
     public ResponseEntity<Void> sendDirectEmail(DirectEmailRequest request) {
         notificationService.sendDirectEmail(request.getEmail(), request.getTemplateCode(), request.getContextData());
-        return ResponseEntity.ok().build();
-    }
-
-    @Override
-    public ResponseEntity<Void> sendDirectZalo(DirectZaloRequest request) {
-        notificationService.sendDirectZalo(request.getZaloIdentifier(), request.getZaloTemplateId(),
-                request.getContextData());
         return ResponseEntity.ok().build();
     }
 }

@@ -25,21 +25,27 @@ public class ClientPreferenceServiceImpl implements ClientPreferenceService {
 
     @Override
     public List<PreferenceResponse> getUserPreferences(UUID userId) {
-        return preferenceRepository.findByUserId(userId).stream()
+        log.info("Fetching user preferences for user: {}", userId);
+        List<PreferenceResponse> preferences = preferenceRepository.findByUserId(userId).stream()
                 .map(p -> PreferenceResponse.builder()
                         .templateCode(p.getTemplate() != null ? p.getTemplate().getCode() : null)
                         .channel(p.getChannel())
                         .isEnabled(p.getIsEnabled())
                         .build())
                 .collect(Collectors.toList());
+        log.info("Successfully fetched {} preferences for user: {}", preferences.size(), userId);
+        return preferences;
     }
 
     @Override
     @Transactional
     public void upsertPreference(UUID userId, String templateCode, String channel, boolean isEnabled) {
-        log.info("Upserting preference for user {}: {} -> {} = {}", userId, templateCode, channel, isEnabled);
+        log.info("Starting upsert preference for user {}: {} -> {} = {}", userId, templateCode, channel, isEnabled);
         NotificationTemplate template = templateRepository.findByCode(templateCode)
-                .orElseThrow(() -> new IllegalArgumentException("Template code not found: " + templateCode));
+                .orElseThrow(() -> {
+                    log.error("Failed to upsert preference. Template code not found: {}", templateCode);
+                    return new IllegalArgumentException("Template code not found: " + templateCode);
+                });
 
         UserNotificationPreference preference = preferenceRepository
                 .findByUserIdAndTemplateAndChannel(userId, template, channel)
@@ -51,5 +57,6 @@ public class ClientPreferenceServiceImpl implements ClientPreferenceService {
 
         preference.setIsEnabled(isEnabled);
         preferenceRepository.save(preference);
+        log.info("Successfully upserted preference for user {}", userId);
     }
 }

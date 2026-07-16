@@ -33,6 +33,7 @@ public class ServiceNotificationServiceImpl implements ServiceNotificationServic
     private final ApplicationEventPublisher eventPublisher;
     private final DeliveryDispatchPublisher dispatchPublisher;
     private final UserAccountClient userAccountClient;
+    private final org.springframework.mail.javamail.JavaMailSender mailSender;
 
     @Override
     @Transactional
@@ -169,35 +170,6 @@ public class ServiceNotificationServiceImpl implements ServiceNotificationServic
                         .build()))
                 .build();
         return sendNotification(request);
-    }
-
-    @Override
-    @Transactional
-    public UUID sendDirectZalo(String zaloPhone, String templateCode, Map<String, Object> contextData) {
-        NotificationTemplate template = templateRepository.findByCode(templateCode)
-                .orElseThrow(() -> new IllegalArgumentException("Template code not found: " + templateCode));
-
-        NotificationPayload payload = payloadRepository.save(NotificationPayload.builder()
-                .template(template)
-                .contextData(contextData)
-                .build());
-
-        NotificationRecipient recipient = recipientRepository.save(NotificationRecipient.builder()
-                .payload(payload)
-                .recipientId(UUID.randomUUID())
-                .isRead(false)
-                .isDeleted(false)
-                .build());
-
-        NotificationDelivery delivery = deliveryRepository.save(NotificationDelivery.builder()
-                .recipientRecord(recipient)
-                .channel("ZALO")
-                .destination(zaloPhone)
-                .status("PENDING")
-                .build());
-
-        publishDispatchEvent(List.of(delivery));
-        return payload.getId();
     }
 
     @Override

@@ -98,27 +98,7 @@ public class ServiceNotificationServiceImplTest {
         verify(eventPublisher, times(1)).publishEvent(any(DeliveriesCreatedEvent.class));
     }
 
-    @Test
-    void sendDirectZalo_ShouldCreatePayloadAndRecipientAndPublishEvent() {
-        String templateId = "ZALO_TPL";
-        Map<String, Object> params = new HashMap<>();
-        params.put("KEY", "VALUE");
 
-        NotificationPayload payloadParam = NotificationPayload.builder()
-                .id(UUID.randomUUID())
-                .build();
-
-        when(templateRepository.findByCode("ZALO_TPL")).thenReturn(Optional.of(template));
-        when(payloadRepository.save(any(NotificationPayload.class))).thenReturn(payloadParam);
-        when(recipientRepository.save(any(NotificationRecipient.class))).thenReturn(NotificationRecipient.builder().id(UUID.randomUUID()).build());
-        when(deliveryRepository.save(any(NotificationDelivery.class))).thenAnswer(i -> i.getArgument(0));
-
-        serviceNotificationService.sendDirectZalo("0123456789", templateId, params);
-
-        verify(payloadRepository, times(1)).save(any(NotificationPayload.class));
-        verify(recipientRepository, times(1)).save(any(NotificationRecipient.class));
-        verify(eventPublisher, times(1)).publishEvent(any(DeliveriesCreatedEvent.class));
-    }
 
     @Test
     void broadcastNotification_ShouldChunkAndSaveUsers() {

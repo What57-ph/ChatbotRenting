@@ -28,7 +28,26 @@ public class NotificationSendRequest {
     @NotBlank
     private String sourceEntityType;
 
+    /**
+     * Context data for the notification payload.
+     * Expected metadata fields (from outside services):
+     * - "subject" (String): The email subject (if channel isEMAIL).
+     * - "htmlContent" (String): The raw compiled HTML body (if channel is EMAIL).
+     * - "actionUrl" (String): URL for the user to click in In-App notifications.
+     * - "imageUrl" (String): Avatar or icon image for notification.
+     * - Any other dynamic variables needed for frontend rendering.
+     */
     private Map<String, Object> contextData;
+
+    /**
+     * Optional constants class to strongly type the Keys pushed into contextData
+     */
+    public static class ContextKeys {
+        public static final String SUBJECT = "subject";
+        public static final String HTML_CONTENT = "htmlContent";
+        public static final String ACTION_URL = "actionUrl";
+        public static final String IMAGE_URL = "imageUrl";
+    }
 
     @NotNull
     private List<RecipientInfo> recipients;
