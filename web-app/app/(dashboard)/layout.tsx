@@ -18,7 +18,7 @@ export default function DashboardLayout({
         
         {/* Nội dung chính scroll độc lập */}
         <main className="flex-1 overflow-y-auto w-full">
-          <div className="container mx-auto h-full p-6 lg:p-8">
+          <div className="container mx-auto h-full p-4 sm:p-6 lg:p-8">
             {children}
           </div>
         </main>
