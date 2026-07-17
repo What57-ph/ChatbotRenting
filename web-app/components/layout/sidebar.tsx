@@ -2,13 +2,14 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, MessageSquare, CreditCard, Settings, LogOut, Bot } from "lucide-react"
+import { LayoutDashboard, MessageSquare, CreditCard, Settings, LogOut, Bot, Star } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
 const navigation = [
   { name: "Overview", href: "/overview", icon: LayoutDashboard },
   { name: "My Chatbots", href: "/chatbots", icon: MessageSquare },
+  { name: "Reviews", href: "/reviews", icon: Star },
   { name: "Billing", href: "/billing", icon: CreditCard },
   { name: "Settings", href: "/settings", icon: Settings },
 ]
