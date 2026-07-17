@@ -3,9 +3,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { User, Shield, Bell } from "lucide-react"
 
-import { ProfileForm } from "./components/profile-form"
-import { SecurityForm } from "./components/security-form"
-import { NotificationPreferences } from "./components/notification-preferences"
+import { ProfileForm } from "@/components/ui/settings/profile-form"
+import { SecurityForm } from "@/components/ui/settings/security-form"
+import { NotificationPreferences } from "@/components/ui/settings/notification-preferences"
 
 export default function SettingsPage() {
   return (
