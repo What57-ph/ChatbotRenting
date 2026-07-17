@@ -24,7 +24,7 @@ export default function LoginPage() {
       dispatch(login({ id: "usr_123", name: "Lumina User", role: "admin" }))
       setLoading(false)
       // Chuyển hướng sau đăng nhập
-      router.push("/dashboard")
+      router.push("/overview")
     }, 1000)
   }
 

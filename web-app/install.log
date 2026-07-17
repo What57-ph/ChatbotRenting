@@ -1,0 +1,12 @@
+npm verbose cli C:\Program Files\nodejs\node.exe C:\Users\User\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+npm info using npm@11.14.1
+npm info using node@v22.19.0
+npm verbose title npm install
+npm verbose argv "install" "--loglevel" "verbose"
+npm verbose logfile logs-max:10 dir:C:\Users\User\AppData\Local\npm-cache\_logs\2026-07-17T03_50_21_216Z-
+npm verbose logfile C:\Users\User\AppData\Local\npm-cache\_logs\2026-07-17T03_50_21_216Z-debug-0.log
+npm http fetch GET 200 https://registry.npmjs.org/@reduxjs%2ftoolkit 5606ms (cache miss)
+npm http fetch GET 200 https://registry.npmjs.org/react 27670ms (cache miss)
+npm http fetch GET 200 https://registry.npmjs.org/react-redux 2788ms (cache miss)
+npm http fetch GET 200 https://registry.npmjs.org/@types%2freact 13987ms (cache miss)
+npm http fetch GET 200 https://registry.npmjs.org/redux 2591ms (cache miss)
