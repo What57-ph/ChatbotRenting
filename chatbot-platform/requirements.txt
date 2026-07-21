@@ -1,0 +1,26 @@
+# Backend API
+fastapi
+uvicorn
+python-multipart
+pydantic
+
+# Google Gemini Core
+google-generativeai
+langchain-google-genai
+llama-index-llms-gemini
+llama-index-embeddings-gemini
+
+# AI Orchestration
+langchain
+langgraph
+langsmith
+llama-index
+
+# Vector Database (PGVector)
+psycopg2-binary
+sqlalchemy
+llama-index-vector-stores-postgres
+
+# Utilities
+python-dotenv
+requests
