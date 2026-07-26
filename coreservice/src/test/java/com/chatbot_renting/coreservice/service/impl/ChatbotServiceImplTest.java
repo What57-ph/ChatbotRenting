@@ -1,7 +1,8 @@
 package com.chatbot_renting.coreservice.service.impl;
 
+import com.chatbot_renting.coreservice.dto.SituationDto;
 import com.chatbot_renting.coreservice.dto.request.ChatbotRequestDto;
-import com.chatbot_renting.coreservice.dto.request.ChatbotSituationDto;
+
 import com.chatbot_renting.coreservice.dto.response.ChatbotResponseDto;
 import com.chatbot_renting.coreservice.entity.Chatbot;
 import com.chatbot_renting.coreservice.entity.enums.ChatbotLanguage;
@@ -24,6 +25,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -40,8 +42,8 @@ class ChatbotServiceImplTest {
 
     private Chatbot chatbot;
     private ChatbotRequestDto requestDto;
-    private final Long USER_ID = 1L;
-    private final Long BOT_ID = 100L;
+    private final UUID USER_ID = UUID.randomUUID();
+    private final UUID BOT_ID = UUID.randomUUID();
 
     @BeforeEach
     void setUp() {
@@ -62,7 +64,7 @@ class ChatbotServiceImplTest {
                 "http://avatar.url",
                 "Prompt",
                 ChatbotLanguage.ENGLISH,
-                Collections.singletonList(new ChatbotSituationDto("Sit 1", "Inst 1"))
+                Collections.singletonList(new SituationDto(UUID.randomUUID(),"Sit 1", "Inst 1"))
         );
     }
 
