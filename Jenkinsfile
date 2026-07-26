@@ -4,7 +4,7 @@ pipeline {
     tools {
         maven 'maven'
         // jdk 'jdk21'
-        nodejs 'node20'
+        // nodejs 'node20'
     }
 
     stages {
@@ -79,14 +79,14 @@ pipeline {
         }
 
         // Build Frontend (Next.js)
-        stage('Build Web App') {
-            steps {
-                dir('web-app') {
-                    sh 'npm install'
-                    sh 'npm run build'
-                }
-            }
-        }
+        // stage('Build Web App') {
+        //     steps {
+        //         dir('web-app') {
+        //             sh 'npm install'
+        //             sh 'npm run build'
+        //         }
+        //     }
+        // }
 
         // Build Chatbot Platform (Python)
         stage('Setup Chatbot Platform') {
