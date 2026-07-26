@@ -1,7 +1,7 @@
 package com.chatbot_renting.coreservice.dto.request;
 
 
-import com.chatbot_renting.coreservice.domain.enums.KnowledgeSourceType;
+import com.chatbot_renting.coreservice.entity.enums.KnowledgeSourceType;
 import java.util.List;
 public record KnowledgeSourceRequestDto(
         String name,

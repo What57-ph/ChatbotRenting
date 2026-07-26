@@ -1,6 +1,6 @@
 package com.chatbot_renting.coreservice.dto.request;
 
-import com.chatbot_renting.coreservice.domain.enums.ChatbotLanguage;
+import com.chatbot_renting.coreservice.entity.enums.ChatbotLanguage;
 import com.chatbot_renting.coreservice.dto.SituationDto;
 
 import java.util.List;

@@ -1,0 +1,299 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.chatbot-renting:coreservice >-------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.0.5:run (default-cli) > test-compile @ coreservice >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ coreservice ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ coreservice ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ coreservice ---
+[INFO] Not copying test resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ coreservice ---
+[INFO] Not compiling test sources
+[INFO] 
+[INFO] <<< spring-boot:4.0.5:run (default-cli) < test-compile @ coreservice <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.0.5:run (default-cli) @ coreservice ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.5)
+
+2026-07-15T11:05:08.924+07:00  INFO 18820 --- [core-service] [           main] c.c.coreservice.CoreserviceApplication   : Starting CoreserviceApplication using Java 23.0.1 with PID 18820 (C:\Project\Chatbot_Renting\coreservice\target\classes started by User in C:\Project\Chatbot_Renting\coreservice)
+2026-07-15T11:05:08.926+07:00  INFO 18820 --- [core-service] [           main] c.c.coreservice.CoreserviceApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-07-15T11:05:09.547+07:00  INFO 18820 --- [core-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-15T11:05:09.688+07:00  INFO 18820 --- [core-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 134 ms. Found 6 JPA repository interfaces.
+2026-07-15T11:05:09.838+07:00  INFO 18820 --- [core-service] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=11cd4427-0619-3d66-b1b7-5fca12bcb177
+2026-07-15T11:05:10.147+07:00  INFO 18820 --- [core-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 9001 (http)
+2026-07-15T11:05:10.157+07:00  INFO 18820 --- [core-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-15T11:05:10.157+07:00  INFO 18820 --- [core-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-07-15T11:05:10.216+07:00  INFO 18820 --- [core-service] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1242 ms
+2026-07-15T11:05:10.347+07:00  INFO 18820 --- [core-service] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-15T11:05:10.392+07:00  INFO 18820 --- [core-service] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-07-15T11:05:10.810+07:00  INFO 18820 --- [core-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-15T11:05:10.836+07:00  INFO 18820 --- [core-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-15T11:05:10.981+07:00  INFO 18820 --- [core-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e14d520
+2026-07-15T11:05:10.982+07:00  INFO 18820 --- [core-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-15T11:05:11.047+07:00  INFO 18820 --- [core-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/coreservice]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 18.3
+	Default catalog/schema: coreservice/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-15T11:05:12.042+07:00  INFO 18820 --- [core-service] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: set client_min_messages = WARNING
+Hibernate: alter table if exists core.chatbot_situations drop constraint if exists FKdyjfo2byh64f5xgeq7b5h934n
+Hibernate: alter table if exists core.knowledge_sources drop constraint if exists FK1qvb53g4r2hwm36badcedbduj
+Hibernate: alter table if exists core.source_files drop constraint if exists FKom8emg52w12209p1kj0gu0apv
+Hibernate: alter table if exists core.source_texts drop constraint if exists FKmjvx2vb8goqnjr2lqct2d470t
+Hibernate: alter table if exists core.source_urls drop constraint if exists FK6sgulx8e96fndvhya2n3o8m4g
+Hibernate: drop table if exists core.chatbot_situations cascade
+Hibernate: drop table if exists core.chatbots cascade
+Hibernate: drop table if exists core.knowledge_sources cascade
+Hibernate: drop table if exists core.source_files cascade
+Hibernate: drop table if exists core.source_texts cascade
+Hibernate: drop table if exists core.source_urls cascade
+Hibernate: create table core.chatbot_situations (created_at timestamp(6) not null, updated_at timestamp(6) not null, chatbot_id uuid not null, id uuid not null, name varchar(150) not null, instruction TEXT not null, primary key (id))
+Hibernate: create table core.chatbots (created_at timestamp(6) not null, deleted_at timestamp(6), updated_at timestamp(6) not null, language varchar(10) not null check ((language in ('VIETNAMESE','ENGLISH'))), id uuid not null, user_id uuid not null, status varchar(20) not null check ((status in ('ACTIVE','INACTIVE','DELETED'))), name varchar(100) not null, avatar_url TEXT, description TEXT, system_prompt TEXT, primary key (id))
+Hibernate: create table core.knowledge_sources (created_at timestamp(6) not null, deleted_at timestamp(6), updated_at timestamp(6) not null, chatbot_id uuid not null, id uuid not null, source_type varchar(20) not null check ((source_type in ('FILE','URL','TEXT'))), status varchar(20) not null check ((status in ('CREATED','PROCESSING','COMPLETED','FAILED','DELETED'))), name varchar(255) not null, primary key (id))
+Hibernate: create table core.source_files (created_at timestamp(6) not null, file_size bigint, updated_at timestamp(6) not null, id uuid not null, source_id uuid not null, file_type varchar(50), file_name varchar(255) not null, file_url TEXT not null, primary key (id))
+Hibernate: create table core.source_texts (created_at timestamp(6) not null, updated_at timestamp(6) not null, id uuid not null, source_id uuid not null unique, content TEXT not null, primary key (id))
+Hibernate: create table core.source_urls (created_at timestamp(6) not null, updated_at timestamp(6) not null, id uuid not null, source_id uuid not null unique, content TEXT, url TEXT not null, primary key (id))
+Hibernate: create index IDXnyul8wykqxpjp60lhiwybuurx on core.chatbots (user_id)
+Hibernate: create index IDX1koeqqmupmw5t94ott0uw1n70 on core.knowledge_sources (chatbot_id)
+Hibernate: alter table if exists core.chatbot_situations add constraint FKdyjfo2byh64f5xgeq7b5h934n foreign key (chatbot_id) references core.chatbots
+Hibernate: alter table if exists core.knowledge_sources add constraint FK1qvb53g4r2hwm36badcedbduj foreign key (chatbot_id) references core.chatbots
+Hibernate: alter table if exists core.source_files add constraint FKom8emg52w12209p1kj0gu0apv foreign key (source_id) references core.knowledge_sources
+Hibernate: alter table if exists core.source_texts add constraint FKmjvx2vb8goqnjr2lqct2d470t foreign key (source_id) references core.knowledge_sources
+Hibernate: alter table if exists core.source_urls add constraint FK6sgulx8e96fndvhya2n3o8m4g foreign key (source_id) references core.knowledge_sources
+2026-07-15T11:05:12.186+07:00  INFO 18820 --- [core-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15T11:05:12.253+07:00  INFO 18820 --- [core-service] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-15T11:05:12.518+07:00  WARN 18820 --- [core-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-15T11:05:13.879+07:00  INFO 18820 --- [core-service] [           main] o.s.cloud.commons.util.InetUtils         : Cannot determine local hostname
+2026-07-15T11:05:14.916+07:00  INFO 18820 --- [core-service] [           main] o.s.cloud.commons.util.InetUtils         : Cannot determine local hostname
+2026-07-15T11:05:14.931+07:00  INFO 18820 --- [core-service] [           main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
+2026-07-15T11:05:14.960+07:00  WARN 18820 --- [core-service] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-07-15T11:05:14.994+07:00  INFO 18820 --- [core-service] [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-07-15T11:05:15.013+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-07-15T11:05:15.016+07:00  INFO 18820 --- [core-service] [           main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-07-15T11:05:15.022+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2026-07-15T11:05:15.022+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2026-07-15T11:05:15.022+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2026-07-15T11:05:15.022+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2026-07-15T11:05:15.022+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2026-07-15T11:05:15.022+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2026-07-15T11:05:15.022+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2026-07-15T11:05:15.318+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2026-07-15T11:05:15.321+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2026-07-15T11:05:15.322+07:00  INFO 18820 --- [core-service] [           main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-07-15T11:05:15.322+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1784088315322 with initial instances count: 3
+2026-07-15T11:05:15.325+07:00  INFO 18820 --- [core-service] [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application CORE-SERVICE with eureka with status UP
+2026-07-15T11:05:15.325+07:00  INFO 18820 --- [core-service] [           main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1784088315325, current=UP, previous=STARTING]
+2026-07-15T11:05:15.327+07:00  INFO 18820 --- [core-service] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CORE-SERVICE/localhost:core-service:9001: registering service...
+2026-07-15T11:05:15.345+07:00  INFO 18820 --- [core-service] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 9001 (http) with context path '/'
+2026-07-15T11:05:15.345+07:00  INFO 18820 --- [core-service] [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 9001
+2026-07-15T11:05:15.370+07:00  INFO 18820 --- [core-service] [foReplicator-%d] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CORE-SERVICE/localhost:core-service:9001 - registration status: 204
+2026-07-15T11:05:16.360+07:00  INFO 18820 --- [core-service] [           main] o.s.cloud.commons.util.InetUtils         : Cannot determine local hostname
+2026-07-15T11:05:16.380+07:00  INFO 18820 --- [core-service] [           main] c.c.coreservice.CoreserviceApplication   : Started CoreserviceApplication in 8.843 seconds (process running for 9.399)
+2026-07-15T11:05:35.607+07:00  INFO 18820 --- [core-service] [nio-9001-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-15T11:05:35.607+07:00  INFO 18820 --- [core-service] [nio-9001-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-15T11:05:35.609+07:00  INFO 18820 --- [core-service] [nio-9001-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-07-15T11:05:35.722+07:00  INFO 18820 --- [core-service] [nio-9001-exec-1] c.c.c.rest.controller.ChatbotController  : REST request to create Chatbot for user: f81da3e7-e689-44ea-8bc6-b76859d67f3d
+2026-07-15T11:05:35.729+07:00  INFO 18820 --- [core-service] [nio-9001-exec-1] c.c.c.service.impl.ChatbotServiceImpl    : Starting createChatbot - userId=f81da3e7-e689-44ea-8bc6-b76859d67f3d, name=Test Bot
+2026-07-15T11:05:35.750+07:00  INFO 18820 --- [core-service] [nio-9001-exec-1] c.c.c.service.impl.ChatbotServiceImpl    : Completed createChatbot - resultId=a471640f-9724-4be0-868e-8201f1baad0c
+Hibernate: insert into core.chatbots (avatar_url,created_at,deleted_at,description,language,name,status,system_prompt,updated_at,user_id,id) values (?,?,?,?,?,?,?,?,?,?,?)
+2026-07-15T11:05:35.815+07:00  INFO 18820 --- [core-service] [nio-9001-exec-2] c.c.c.rest.controller.ChatbotController  : REST request to get all Chatbots for user: f81da3e7-e689-44ea-8bc6-b76859d67f3d, page: 0
+2026-07-15T11:05:35.817+07:00  INFO 18820 --- [core-service] [nio-9001-exec-2] c.c.c.service.impl.ChatbotServiceImpl    : Starting getAllChatbots - userId=f81da3e7-e689-44ea-8bc6-b76859d67f3d
+2026-07-15T11:05:36.138+07:00  WARN 18820 --- [core-service] [nio-9001-exec-2] org.hibernate.orm.query                  : HHH90003004: firstResult/maxResults specified with collection fetch; applying in memory
+Hibernate: select c1_0.id,c1_0.avatar_url,c1_0.created_at,c1_0.deleted_at,c1_0.description,c1_0.language,c1_0.name,s1_0.chatbot_id,s1_0.id,s1_0.created_at,s1_0.instruction,s1_0.name,s1_0.updated_at,c1_0.status,c1_0.system_prompt,c1_0.updated_at,c1_0.user_id from core.chatbots c1_0 left join core.chatbot_situations s1_0 on c1_0.id=s1_0.chatbot_id where (c1_0.deleted_at IS NULL) and c1_0.user_id=?
+2026-07-15T11:05:36.199+07:00  INFO 18820 --- [core-service] [nio-9001-exec-2] c.c.c.service.impl.ChatbotServiceImpl    : Completed getAllChatbots - resultSize=1
+2026-07-15T11:05:36.207+07:00  WARN 18820 --- [core-service] [nio-9001-exec-2] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-07-15T11:05:36.224+07:00  INFO 18820 --- [core-service] [nio-9001-exec-3] c.c.c.rest.controller.ChatbotController  : REST request to update Chatbot id: a471640f-9724-4be0-868e-8201f1baad0c for user: f81da3e7-e689-44ea-8bc6-b76859d67f3d
+2026-07-15T11:05:36.225+07:00  INFO 18820 --- [core-service] [nio-9001-exec-3] c.c.c.service.impl.ChatbotServiceImpl    : Starting updateChatbot - botId=a471640f-9724-4be0-868e-8201f1baad0c, userId=f81da3e7-e689-44ea-8bc6-b76859d67f3d
+Hibernate: select c1_0.id,c1_0.avatar_url,c1_0.created_at,c1_0.deleted_at,c1_0.description,c1_0.language,c1_0.name,s1_0.chatbot_id,s1_0.id,s1_0.created_at,s1_0.instruction,s1_0.name,s1_0.updated_at,c1_0.status,c1_0.system_prompt,c1_0.updated_at,c1_0.user_id from core.chatbots c1_0 left join core.chatbot_situations s1_0 on c1_0.id=s1_0.chatbot_id where (c1_0.deleted_at IS NULL) and c1_0.id=? and c1_0.user_id=?
+2026-07-15T11:05:36.237+07:00  INFO 18820 --- [core-service] [nio-9001-exec-3] c.c.c.service.impl.ChatbotServiceImpl    : Completed updateChatbot - resultId=c7cf0e32-ab7f-408c-8e9a-f3c68875a505
+2026-07-15T11:05:36.242+07:00 ERROR 18820 --- [core-service] [nio-9001-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.orm.jpa.JpaSystemException: Found shared references to a collection: com.chatbot_renting.coreservice.entity.Chatbot.knowledgeSources] with root cause
+
+org.hibernate.HibernateException: Found shared references to a collection: com.chatbot_renting.coreservice.entity.Chatbot.knowledgeSources
+	at org.hibernate.engine.internal.Collections.processReachableCollection(Collections.java:174) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.FlushVisitor.processCollection(FlushVisitor.java:35) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractVisitor.processValue(AbstractVisitor.java:88) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractVisitor.processValue(AbstractVisitor.java:59) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractVisitor.processEntityPropertyValues(AbstractVisitor.java:53) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.DefaultFlushEntityEventListener.onFlushEntity(DefaultFlushEntityEventListener.java:154) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEntities(AbstractFlushingEventListener.java:229) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:69) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:63) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:39) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.internal.SessionImpl.fireFlush(SessionImpl.java:1484) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:481) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2111) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2033) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:410) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:166) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commitNoRollbackOnly(JdbcResourceLocalTransactionCoordinatorImpl.java:248) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:242) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:89) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:553) ~[spring-orm-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:794) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:757) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:687) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:408) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.6.jar:7.0.6]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.6.jar:7.0.6]
+	at com.chatbot_renting.coreservice.service.impl.ChatbotServiceImpl$$SpringCGLIB$$0.updateChatbot(<generated>) ~[classes/:na]
+	at com.chatbot_renting.coreservice.rest.controller.ChatbotController.updateChatbot(ChatbotController.java:57) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:914) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:650) ~[tomcat-embed-core-11.0.20.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.20.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+
+2026-07-15T11:05:36.288+07:00  INFO 18820 --- [core-service] [nio-9001-exec-5] c.c.c.rest.controller.ChatbotController  : REST request to delete Chatbot id: a471640f-9724-4be0-868e-8201f1baad0c for user: f81da3e7-e689-44ea-8bc6-b76859d67f3d
+2026-07-15T11:05:36.288+07:00  INFO 18820 --- [core-service] [nio-9001-exec-5] c.c.c.service.impl.ChatbotServiceImpl    : Starting deleteChatbot - botId=a471640f-9724-4be0-868e-8201f1baad0c, userId=f81da3e7-e689-44ea-8bc6-b76859d67f3d
+Hibernate: select c1_0.id,c1_0.avatar_url,c1_0.created_at,c1_0.deleted_at,c1_0.description,c1_0.language,c1_0.name,s1_0.chatbot_id,s1_0.id,s1_0.created_at,s1_0.instruction,s1_0.name,s1_0.updated_at,c1_0.status,c1_0.system_prompt,c1_0.updated_at,c1_0.user_id from core.chatbots c1_0 left join core.chatbot_situations s1_0 on c1_0.id=s1_0.chatbot_id where (c1_0.deleted_at IS NULL) and c1_0.id=? and c1_0.user_id=?
+2026-07-15T11:05:36.293+07:00  INFO 18820 --- [core-service] [nio-9001-exec-5] c.c.c.service.impl.ChatbotServiceImpl    : Completed deleteChatbot - resultId=6705ee42-e06b-43a5-b4d6-437d6b40ca22
+2026-07-15T11:05:36.294+07:00 ERROR 18820 --- [core-service] [nio-9001-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.orm.jpa.JpaSystemException: Found shared references to a collection: com.chatbot_renting.coreservice.entity.Chatbot.knowledgeSources] with root cause
+
+org.hibernate.HibernateException: Found shared references to a collection: com.chatbot_renting.coreservice.entity.Chatbot.knowledgeSources
+	at org.hibernate.engine.internal.Collections.processReachableCollection(Collections.java:174) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.FlushVisitor.processCollection(FlushVisitor.java:35) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractVisitor.processValue(AbstractVisitor.java:88) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractVisitor.processValue(AbstractVisitor.java:59) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractVisitor.processEntityPropertyValues(AbstractVisitor.java:53) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.DefaultFlushEntityEventListener.onFlushEntity(DefaultFlushEntityEventListener.java:154) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEntities(AbstractFlushingEventListener.java:229) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:69) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:63) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:39) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.internal.SessionImpl.fireFlush(SessionImpl.java:1484) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:481) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2111) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2033) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:410) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:166) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commitNoRollbackOnly(JdbcResourceLocalTransactionCoordinatorImpl.java:248) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:242) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:89) ~[hibernate-core-7.2.7.Final.jar:7.2.7.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:553) ~[spring-orm-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:794) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:757) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:687) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:408) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.6.jar:7.0.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.6.jar:7.0.6]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719) ~[spring-aop-7.0.6.jar:7.0.6]
+	at com.chatbot_renting.coreservice.service.impl.ChatbotServiceImpl$$SpringCGLIB$$0.deleteChatbot(<generated>) ~[classes/:na]
+	at com.chatbot_renting.coreservice.rest.controller.ChatbotController.deleteChatbot(ChatbotController.java:65) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at org.springframework.web.servlet.FrameworkServlet.doDelete(FrameworkServlet.java:925) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:651) ~[tomcat-embed-core-11.0.20.jar:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.6.jar:7.0.6]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.20.jar:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.6.jar:7.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57) ~[tomcat-embed-core-11.0.20.jar:11.0.20]
+	at java.base/java.lang.Thread.run(Thread.java:1575) ~[na:na]
+

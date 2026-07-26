@@ -1,4 +1,4 @@
-package com.chatbot_renting.coreservice.domain.entity;
+package com.chatbot_renting.coreservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,25 +6,17 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "source_urls")
+@Table(name = "source_texts")
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class SourceUrl {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Builder(toBuilder = true)
+public class SourceText extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "source_id", nullable = false)
     private KnowledgeSource knowledgeSource;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String url;
-
-    @Column(columnDefinition = "TEXT")
     private String content;
 }

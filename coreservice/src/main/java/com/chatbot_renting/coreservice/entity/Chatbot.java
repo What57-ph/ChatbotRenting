@@ -1,7 +1,7 @@
-package com.chatbot_renting.coreservice.domain.entity;
+package com.chatbot_renting.coreservice.entity;
 
-import com.chatbot_renting.coreservice.domain.enums.ChatbotLanguage;
-import com.chatbot_renting.coreservice.domain.enums.ChatbotStatus;
+import com.chatbot_renting.coreservice.entity.enums.ChatbotLanguage;
+import com.chatbot_renting.coreservice.entity.enums.ChatbotStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,22 +9,22 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
+
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
-@Table(name = "chatbots")
+@Table(name = "chatbots", indexes = { @Index(columnList = "user_id") })
+@SQLRestriction("deleted_at IS NULL")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Chatbot {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Builder(toBuilder = true)
+public class Chatbot extends BaseEntity {
 
     @Column(name = "user_id", nullable = false)
-    private Long userId;
+    private UUID userId;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -54,12 +54,4 @@ public class Chatbot {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
 }
