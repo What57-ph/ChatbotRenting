@@ -3,8 +3,8 @@ pipeline {
 
     tools {
         maven 'maven'
-        jdk 'jdk21'
-        nodejs 'node20'
+        // jdk 'jdk21'
+        // nodejs 'node20'
     }
 
     stages {
