@@ -1,7 +1,6 @@
 package com.chatbot_renting.coreservice.mapper;
 
-
-import com.chatbot_renting.coreservice.domain.entity.Chatbot;
+import com.chatbot_renting.coreservice.entity.Chatbot;
 import com.chatbot_renting.coreservice.dto.response.ChatbotResponseDto;
 import com.chatbot_renting.coreservice.dto.SituationDto;
 

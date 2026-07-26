@@ -1,8 +1,9 @@
-package com.chatbot_renting.coreservice.domain.enums;
+package com.chatbot_renting.coreservice.entity.enums;
 
 public enum ProcessingStatus {
     CREATED,
     PROCESSING,
     COMPLETED,
-    FAILED
+    FAILED,
+    DELETED
 }

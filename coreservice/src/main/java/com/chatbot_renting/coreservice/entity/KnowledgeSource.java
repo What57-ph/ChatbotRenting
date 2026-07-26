@@ -1,27 +1,23 @@
-package com.chatbot_renting.coreservice.domain.entity;
+package com.chatbot_renting.coreservice.entity;
 
-import com.chatbot_renting.coreservice.domain.enums.KnowledgeSourceType;
-import com.chatbot_renting.coreservice.domain.enums.ProcessingStatus;
+import com.chatbot_renting.coreservice.entity.enums.KnowledgeSourceType;
+import com.chatbot_renting.coreservice.entity.enums.ProcessingStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.SQLRestriction;
+
 @Entity
-@Table(name = "knowledge_sources")
+@Table(name = "knowledge_sources", indexes = { @Index(columnList = "chatbot_id") })
+@SQLRestriction("deleted_at IS NULL")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class KnowledgeSource {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Builder(toBuilder = true)
+public class KnowledgeSource extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chatbot_id", nullable = false)
@@ -49,12 +45,4 @@ public class KnowledgeSource {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
 }

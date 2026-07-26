@@ -1,9 +1,10 @@
 package com.chatbot_renting.coreservice.mapper;
 
-import com.chatbot_renting.coreservice.domain.entity.KnowledgeSource;
-import com.chatbot_renting.coreservice.domain.entity.SourceFile;
+import com.chatbot_renting.coreservice.entity.KnowledgeSource;
+import com.chatbot_renting.coreservice.entity.SourceFile;
 import com.chatbot_renting.coreservice.dto.response.KnowledgeSourceResponseDto;
 import java.util.List;
+
 public class KnowledgeSourceMapper {
     public static KnowledgeSourceResponseDto toDto(KnowledgeSource source) {
         List<String> fileUrls = source.getSourceFiles() != null

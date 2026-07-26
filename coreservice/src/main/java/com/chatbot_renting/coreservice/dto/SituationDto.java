@@ -1,8 +1,10 @@
 package com.chatbot_renting.coreservice.dto;
 
 
+import java.util.UUID;
+
 public record SituationDto(
-        Long id,
+        UUID id,
         String name,
         String instruction
 ) {

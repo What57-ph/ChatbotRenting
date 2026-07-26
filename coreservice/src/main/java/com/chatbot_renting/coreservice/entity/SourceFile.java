@@ -1,4 +1,4 @@
-package com.chatbot_renting.coreservice.domain.entity;
+package com.chatbot_renting.coreservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,15 +8,10 @@ import java.util.UUID;
 @Entity
 @Table(name = "source_files")
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class SourceFile {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Builder(toBuilder = true)
+public class SourceFile extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "source_id", nullable = false)
