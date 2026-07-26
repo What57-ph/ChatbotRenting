@@ -24,7 +24,7 @@ public class UserAccountClientImpl extends AbstractRestClientConfiguration imple
     public static final String SERVICE_ID = "authservice";
     private final UserAccountProperties properties;
     private RestTemplate restTemplate = getRestTemplate();
-    public UserAccountClientImpl(String serviceId, RestTemplateBuilder restTemplateBuilder, UserAccountProperties properties) {
+    public UserAccountClientImpl(RestTemplateBuilder restTemplateBuilder, UserAccountProperties properties) {
         super(SERVICE_ID, restTemplateBuilder);
         this.properties = properties;
     }
