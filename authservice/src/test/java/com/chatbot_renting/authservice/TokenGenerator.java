@@ -1,4 +1,4 @@
-package com.lecture_mind.authservice;
+package com.chatbot_renting.authservice;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

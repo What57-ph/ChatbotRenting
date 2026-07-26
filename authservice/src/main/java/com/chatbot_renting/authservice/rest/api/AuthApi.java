@@ -1,11 +1,11 @@
 package com.chatbot_renting.authservice.rest.api;
 
-import com.lecturemind.commonservice.domain.Request.LogoutRequest;
-import com.lecturemind.commonservice.domain.Request.RefreshTokenRequest;
-import com.lecturemind.commonservice.domain.Request.ReqLoginDTO;
-import com.lecturemind.commonservice.domain.Request.SignupRequest;
-import com.lecturemind.commonservice.domain.Response.ApiResponse;
-import com.lecturemind.commonservice.domain.Response.ResLoginDTO;
+import com.chatbot_renting.commonservice.domain.Request.LogoutRequest;
+import com.chatbot_renting.commonservice.domain.Request.RefreshTokenRequest;
+import com.chatbot_renting.commonservice.domain.Request.ReqLoginDTO;
+import com.chatbot_renting.commonservice.domain.Request.SignupRequest;
+import com.chatbot_renting.commonservice.domain.Response.ApiResponse;
+import com.chatbot_renting.commonservice.domain.Response.ResLoginDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
