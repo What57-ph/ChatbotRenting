@@ -1,4 +1,4 @@
-package com.lecturemind.commonservice.domain.Request;
+package com.chatbot_renting.commonservice.domain.Request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

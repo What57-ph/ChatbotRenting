@@ -1,8 +1,8 @@
 package com.lecturemind.commonservice.exception;
 
 
-import com.lecturemind.commonservice.domain.Response.ApiResponse;
-import com.lecturemind.commonservice.domain.Response.ResponseBuilder;
+import com.chatbot_renting.commonservice.domain.Response.ApiResponse;
+import com.chatbot_renting.commonservice.domain.Response.ResponseBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
