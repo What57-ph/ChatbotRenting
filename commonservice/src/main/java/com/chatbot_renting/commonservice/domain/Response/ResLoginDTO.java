@@ -1,9 +1,10 @@
-package com.lecturemind.commonservice.domain.Response;
+package com.chatbot_renting.commonservice.domain.Response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -21,7 +22,7 @@ public class ResLoginDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class UserLogin{
-        Long id;
+        UUID id;
         String email;
         String fullName;
         List<String> roles;

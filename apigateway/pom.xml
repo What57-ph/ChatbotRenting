@@ -58,7 +58,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.lecturemind</groupId>
+      <groupId>com.chatbot-renting</groupId>
       <artifactId>commonservice</artifactId>
       <version>0.0.1-SNAPSHOT</version>
       <exclusions>

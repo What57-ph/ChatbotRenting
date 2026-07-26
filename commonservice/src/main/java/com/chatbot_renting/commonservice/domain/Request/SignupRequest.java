@@ -1,4 +1,4 @@
-package com.lecturemind.commonservice.domain.Request;
+package com.chatbot_renting.commonservice.domain.Request;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

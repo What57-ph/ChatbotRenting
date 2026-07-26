@@ -1,4 +1,4 @@
-package com.lecturemind.commonservice.domain.Response;
+package com.chatbot_renting.commonservice.domain.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
