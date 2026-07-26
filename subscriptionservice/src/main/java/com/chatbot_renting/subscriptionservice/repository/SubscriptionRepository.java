@@ -10,11 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {
+public interface SubscriptionRepository extends JpaRepository<Subscription, UUID> {
     
-    List<Subscription> findByUserIdAndStatusIn(Long userId, List<SubscriptionStatus> statuses);
+    List<Subscription> findByUserIdAndStatusIn(UUID userId, List<SubscriptionStatus> statuses);
 
     List<Subscription> findByStatusAndAutoRenewTrueAndCurrentPeriodEndLessThanEqual(SubscriptionStatus status, LocalDateTime targetDate);
 
@@ -22,7 +23,7 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
 
     List<Subscription> findByStatusAndCurrentPeriodEndLessThan(SubscriptionStatus status, LocalDateTime targetDate);
 
-    long countByUserIdAndStatusNotIn(Long userId, List<SubscriptionStatus> statuses);
+    long countByUserIdAndStatusNotIn(UUID userId, List<SubscriptionStatus> statuses);
 
     List<Subscription> findByStatusAndAutoRenewTrueAndCurrentPeriodEndGreaterThanEqualAndCurrentPeriodEndLessThan(SubscriptionStatus status, LocalDateTime startDate, LocalDateTime endDate);
 }

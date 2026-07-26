@@ -5,6 +5,7 @@ import com.chatbot_renting.subscriptionservice.dto.request.SubscriptionPlanUpdat
 import com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanDto;
 import com.chatbot_renting.subscriptionservice.rest.api.ClientSubscriptionPlanApi;
 import com.chatbot_renting.subscriptionservice.service.SubscriptionPlanService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,12 @@ public class ClientSubscriptionPlanController implements ClientSubscriptionPlanA
     }
 
     @Override
+    public ResponseEntity<SubscriptionPlanDto> getPlan(UUID id) {
+        log.info("REST request to get subscription plan: {}", id);
+        return ResponseEntity.ok(subscriptionPlanService.getPlan(id));
+    }
+
+    @Override
     public ResponseEntity<SubscriptionPlanDto> createPlan(SubscriptionPlanCreateRequest request) {
         log.info("REST request to create subscription plan: {}", request.getCode());
         SubscriptionPlanDto createdPlan = subscriptionPlanService.createPlan(request);
@@ -37,13 +44,13 @@ public class ClientSubscriptionPlanController implements ClientSubscriptionPlanA
     }
 
     @Override
-    public ResponseEntity<SubscriptionPlanDto> updatePlan(Long planId, SubscriptionPlanUpdateRequest request) {
+    public ResponseEntity<SubscriptionPlanDto> updatePlan(UUID planId, SubscriptionPlanUpdateRequest request) {
         log.info("REST request to update subscription plan ID: {}", planId);
         return ResponseEntity.ok(subscriptionPlanService.updatePlan(planId, request));
     }
 
     @Override
-    public ResponseEntity<Void> softDeletePlan(Long planId) {
+    public ResponseEntity<Void> softDeletePlan(UUID planId) {
         log.info("REST request to soft delete subscription plan ID: {}", planId);
         subscriptionPlanService.softDeletePlan(planId);
         return ResponseEntity.noContent().build();

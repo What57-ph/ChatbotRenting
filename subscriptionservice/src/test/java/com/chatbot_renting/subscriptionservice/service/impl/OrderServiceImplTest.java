@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -41,49 +42,61 @@ class OrderServiceImplTest {
     @Test
     void getUserOrders_ReturnsPagedResponse() {
         // Arrange
-        Order order = Order.builder().id(1L).build();
+        UUID userId = UUID.randomUUID();
+        UUID orderId = UUID.randomUUID();
+
+        Order order = Order.builder().id(orderId).build();
         Page<Order> orderPage = new PageImpl<>(Collections.singletonList(order));
-        
-        when(orderRepository.findByUserIdAndStatusOrderByCreatedAtDesc(eq(1L), eq(OrderStatus.PAID), any(PageRequest.class)))
+
+        when(orderRepository.findByUserIdAndStatusOrderByCreatedAtDesc(eq(userId), eq(OrderStatus.PAID), any(PageRequest.class)))
                 .thenReturn(orderPage);
-        
+
         OrderDto orderDto = new OrderDto();
-        orderDto.setId(1L);
+        orderDto.setId(orderId);
         when(orderMapper.toDto(any(Order.class))).thenReturn(orderDto);
-        
+
         // Act
-        PagedResponse<OrderDto> result = orderService.getUserOrders(1L, 1, 10, "PAID");
-        
+        PagedResponse<OrderDto> result = orderService.getUserOrders(userId, 1, 10, "PAID");
+
         // Assert
         assertNotNull(result);
         assertEquals(1, result.getData().size());
-        assertEquals(1L, result.getData().get(0).getId());
+        assertEquals(orderId, result.getData().get(0).getId()); // Sửa: So sánh UUID thay vì 1L
     }
 
     @Test
     void getOrder_Exists_ReturnsDto() {
         // Arrange
-        Order order = Order.builder().id(2L).userId(1L).build();
-        when(orderRepository.findById(2L)).thenReturn(Optional.of(order));
-        
+        UUID userId = UUID.randomUUID();
+        UUID orderId = UUID.randomUUID();
+
+        Order order = Order.builder().id(orderId).userId(userId).build();
+        // Giả sử repository tìm kiếm theo orderId
+        when(orderRepository.findById(orderId)).thenReturn(Optional.of(order));
+
         OrderDto orderDto = new OrderDto();
-        orderDto.setId(2L);
+        orderDto.setId(orderId);
         when(orderMapper.toDto(order)).thenReturn(orderDto);
-        
+
         // Act
-        OrderDto result = orderService.getOrder(1L, 2L);
-        
+        // Lưu ý: Đảm bảo thứ tự tham số truyền vào UserService khớp với phương thức thật
+        // (Trong file này, tôi giả định đang gọi theo dạng userId, orderId)
+        OrderDto result = orderService.getOrder(userId, orderId);
+
         // Assert
         assertNotNull(result);
-        assertEquals(2L, result.getId());
+        assertEquals(orderId, result.getId()); // Sửa: So sánh UUID thay vì 2L
     }
 
     @Test
     void getOrder_NotFound_ThrowsException() {
         // Arrange
-        when(orderRepository.findById(2L)).thenReturn(Optional.empty());
-        
+        UUID userId = UUID.randomUUID();
+        UUID orderId = UUID.randomUUID();
+
+        when(orderRepository.findById(orderId)).thenReturn(Optional.empty());
+
         // Act & Assert
-        assertThrows(AppNotFoundException.class, () -> orderService.getOrder(1L, 2L));
+        assertThrows(AppNotFoundException.class, () -> orderService.getOrder(userId, orderId));
     }
 }

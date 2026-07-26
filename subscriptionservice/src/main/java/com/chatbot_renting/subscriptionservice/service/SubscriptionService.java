@@ -7,13 +7,14 @@ import com.chatbot_renting.subscriptionservice.dto.request.SubscriptionUpgradeRe
 import com.chatbot_renting.subscriptionservice.dto.response.CurrentSubscriptionResponse;
 import com.chatbot_renting.subscriptionservice.dto.response.SubscriptionCreateResponse;
 import com.chatbot_renting.subscriptionservice.dto.response.SubscriptionDto;
+import java.util.UUID;
 
 public interface SubscriptionService {
-    SubscriptionCreateResponse createSubscription(Long userId, SubscriptionCreateRequest request);
-    CurrentSubscriptionResponse getCurrentSubscription(Long userId);
-    SubscriptionDto getSubscriptionByUserId(Long userId);
-    SubscriptionDto cancelSubscription(Long userId);
-    SubscriptionCreateResponse upgradeSubscription(Long userId, SubscriptionUpgradeRequest request);
-    SubscriptionDto downgradeSubscription(Long userId, SubscriptionDowngradeRequest request);
-    SubscriptionDto toggleAutoRenew(Long userId, SubscriptionAutoRenewRequest request);
+    SubscriptionCreateResponse createSubscription(UUID userId, SubscriptionCreateRequest request);
+    CurrentSubscriptionResponse getCurrentSubscription(UUID userId);
+    SubscriptionDto getSubscriptionByUserId(UUID userId);
+    SubscriptionDto cancelSubscription(UUID userId);
+    SubscriptionCreateResponse upgradeSubscription(UUID userId, SubscriptionUpgradeRequest request);
+    SubscriptionDto downgradeSubscription(UUID userId, SubscriptionDowngradeRequest request);
+    SubscriptionDto toggleAutoRenew(UUID userId, SubscriptionAutoRenewRequest request);
 }

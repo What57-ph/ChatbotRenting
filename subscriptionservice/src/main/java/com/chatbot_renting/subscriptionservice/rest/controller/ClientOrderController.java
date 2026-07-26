@@ -5,6 +5,7 @@ import com.chatbot_renting.subscriptionservice.dto.response.PagedResponse;
 import com.chatbot_renting.subscriptionservice.rest.api.ClientOrderApi;
 import com.chatbot_renting.subscriptionservice.service.OrderService;
 import com.chatbot_renting.subscriptionservice.utils.SecurityUtils;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +22,14 @@ public class ClientOrderController implements ClientOrderApi {
 
     @Override
     public ResponseEntity<PagedResponse<OrderDto>> getOrders(int page, int limit, String status) {
-        Long userId = securityUtils.getUserIdOrElseThrow();
+        UUID userId = securityUtils.getUserIdOrElseThrow();
         log.info("Fetching orders for user {} page {}", userId, page);
         return ResponseEntity.ok(orderService.getUserOrders(userId, page, limit, status));
     }
 
     @Override
-    public ResponseEntity<OrderDto> getOrder(Long orderId) {
-        Long userId = securityUtils.getUserIdOrElseThrow();
+    public ResponseEntity<OrderDto> getOrder(UUID orderId) {
+        UUID userId = securityUtils.getUserIdOrElseThrow();
         log.info("Fetching order {} for user {}", orderId, userId);
         return ResponseEntity.ok(orderService.getOrder(userId, orderId));
     }

@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
+import java.util.UUID;
 
-    Page<Invoice> findByOrderUserIdOrderByIssuedAtDesc(Long userId, Pageable pageable);
+@Repository
+public interface InvoiceRepository extends JpaRepository<Invoice, UUID> {
+
+    Page<Invoice> findByOrderUserIdOrderByIssuedAtDesc(UUID userId, Pageable pageable);
 }

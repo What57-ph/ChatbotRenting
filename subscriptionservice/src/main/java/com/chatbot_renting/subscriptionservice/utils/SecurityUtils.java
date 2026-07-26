@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Bean cụ thể cho subscriptionservice, extend SecurityContextUtil.
@@ -39,19 +40,18 @@ public class SecurityUtils extends SecurityContextUtil {
      * Lấy userId từ JWT claim "userId".
      * Claim trong authservice được set dưới dạng Long/Integer (Number).
      */
-    public Optional<Long> getUserId() {
+    public Optional<UUID> getUserId() {
         return getUserTokenClaim(CLAIM_USER_ID, Object.class)
                 .map(obj -> {
-                    if (obj instanceof Number num) return num.longValue();
-                    try { return Long.parseLong(obj.toString()); }
-                    catch (NumberFormatException e) { return null; }
+                    try { return UUID.fromString(obj.toString()); }
+                    catch (IllegalArgumentException e) { return null; }
                 });
     }
 
     /**
      * Lấy userId hoặc throw 401 nếu không có token hợp lệ.
      */
-    public Long getUserIdOrElseThrow() {
+    public UUID getUserIdOrElseThrow() {
         return getUserId().orElseThrow(() ->
                 new AppUnauthorizedException(new AppError(SubscriptionErrorCode.UNAUTHORIZED)));
     }

@@ -3,6 +3,7 @@ package com.chatbot_renting.subscriptionservice.rest.api;
 import com.chatbot_renting.subscriptionservice.dto.request.InvoiceStatusUpdateRequest;
 import com.chatbot_renting.subscriptionservice.dto.response.InvoiceStatusUpdateResponse;
 import jakarta.validation.Valid;
+import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,6 @@ public interface CallbackInvoiceApi {
 
     @PostMapping("/{invoiceId}/status")
     ResponseEntity<InvoiceStatusUpdateResponse> updateInvoiceStatus(
-            @PathVariable("invoiceId") Long invoiceId,
+            @PathVariable("invoiceId") UUID invoiceId,
             @Valid @RequestBody InvoiceStatusUpdateRequest request);
 }

@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.chatbot_renting.subscriptionservice.dto.request.UsageRecordRequest;
 import java.util.Collections;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,7 +34,7 @@ class UsageServiceImplTest {
 
     @Mock
     private SubscriptionRepository subscriptionRepository;
-    
+
     @Mock
     private UsageRecordRepository usageRecordRepository;
 
@@ -43,12 +44,15 @@ class UsageServiceImplTest {
     @Test
     void checkUsage_UsesSnapshotLimits_NotPlanLimits() {
         // Arrange
+        UUID userId = UUID.randomUUID();
+        UUID subscriptionId = UUID.randomUUID();
+
         SubscriptionPlan livePlan = SubscriptionPlan.builder()
                 .maxChatbots(50) // Live plan allows 50
                 .build();
 
         Subscription sub = Subscription.builder()
-                .id(1L)
+                .id(subscriptionId)
                 .status(SubscriptionStatus.ACTIVE)
                 .plan(livePlan)
                 .currentMaxChatbots(10) // Snapshot allows only 10
@@ -60,13 +64,14 @@ class UsageServiceImplTest {
                 .chatbotCount(10) // They already have 10
                 .build();
 
-        when(subscriptionRepository.findByUserIdAndStatusIn(eq(1L), any()))
+        // Sử dụng biến userId và subscriptionId đã khởi tạo
+        when(subscriptionRepository.findByUserIdAndStatusIn(eq(userId), any()))
                 .thenReturn(Collections.singletonList(sub));
-        when(usageSummaryRepository.findBySubscriptionIdAndPeriodStart(any(), any()))
+        when(usageSummaryRepository.findBySubscriptionIdAndPeriodStart(eq(subscriptionId), any()))
                 .thenReturn(java.util.Optional.of(summary));
 
         UsageCheckRequest req = new UsageCheckRequest();
-        req.setUserId(1L);
+        req.setUserId(userId); // Truyền đúng userId đã mock
         req.setUsageType(UsageType.CHATBOT_CREATED);
 
         // Act
@@ -82,20 +87,24 @@ class UsageServiceImplTest {
     @Test
     void recordUsage_CreatesNewSummaryIfNoneExists() {
         // Arrange
+        UUID userId = UUID.randomUUID();
+        UUID subscriptionId = UUID.randomUUID();
+
         Subscription sub = Subscription.builder()
-                .id(1L)
+                .id(subscriptionId)
                 .status(SubscriptionStatus.ACTIVE)
                 .currentPeriodStart(java.time.LocalDateTime.now())
                 .currentPeriodEnd(java.time.LocalDateTime.now().plusDays(30))
                 .build();
-        
-        when(subscriptionRepository.findByUserIdAndStatusIn(eq(1L), any()))
+
+        // Sử dụng biến userId và subscriptionId đã khởi tạo
+        when(subscriptionRepository.findByUserIdAndStatusIn(eq(userId), any()))
                 .thenReturn(Collections.singletonList(sub));
-        when(usageSummaryRepository.findBySubscriptionIdAndPeriodStart(any(), any()))
+        when(usageSummaryRepository.findBySubscriptionIdAndPeriodStart(eq(subscriptionId), any()))
                 .thenReturn(java.util.Optional.empty()); // No existing summary
 
         UsageRecordRequest req = new UsageRecordRequest();
-        req.setUserId(1L);
+        req.setUserId(userId); // Truyền đúng userId đã mock
         req.setUsageType(UsageType.TOKEN_USED);
         req.setQuantity(50);
 
@@ -104,8 +113,8 @@ class UsageServiceImplTest {
 
         // Assert
         org.mockito.Mockito.verify(usageRecordRepository).save(any());
-        org.mockito.Mockito.verify(usageSummaryRepository).save(argThat(summary -> 
-            summary.getTokensUsed() == 50
+        org.mockito.Mockito.verify(usageSummaryRepository).save(argThat(summary ->
+                summary.getTokensUsed() == 50
         ));
     }
 }

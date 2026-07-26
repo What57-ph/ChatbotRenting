@@ -2,6 +2,7 @@ package com.chatbot_renting.subscriptionservice.rest.api;
 
 import com.chatbot_renting.subscriptionservice.dto.response.OrderDto;
 import com.chatbot_renting.subscriptionservice.dto.response.PagedResponse;
+import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,5 +18,5 @@ public interface ClientOrderApi {
             @RequestParam(required = false) String status);
 
     @GetMapping("/{orderId}")
-    ResponseEntity<OrderDto> getOrder(@PathVariable("orderId") Long orderId);
+    ResponseEntity<OrderDto> getOrder(@PathVariable("orderId") UUID orderId);
 }

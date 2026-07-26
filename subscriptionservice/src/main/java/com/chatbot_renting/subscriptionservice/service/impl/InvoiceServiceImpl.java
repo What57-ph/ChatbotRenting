@@ -22,6 +22,7 @@ import com.chatbot_renting.subscriptionservice.repository.SubscriptionRepository
 import com.chatbot_renting.subscriptionservice.repository.UsageSummaryRepository;
 import com.chatbot_renting.subscriptionservice.service.InvoiceService;
 import com.chatbot_renting.subscriptionservice.utils.BillingPeriodUtils;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     @Transactional
-    public InvoiceStatusUpdateResponse updateInvoiceStatus(Long invoiceId, InvoiceStatusUpdateRequest request) {
+    public InvoiceStatusUpdateResponse updateInvoiceStatus(UUID invoiceId, InvoiceStatusUpdateRequest request) {
         log.info("Starting updateInvoiceStatus - invoiceId={}, status={}", invoiceId, request.getStatus());
         try {
             Invoice invoice = invoiceRepository.findById(invoiceId)
@@ -148,7 +149,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
             // Apply scheduled downgrade if present
             SubscriptionPlan activePlan = plan;
-            Long scheduledPlanId = subscription.getScheduledPlanId();
+            UUID scheduledPlanId = subscription.getScheduledPlanId();
             if (scheduledPlanId != null) {
                 activePlan = planRepository.findById(scheduledPlanId).orElse(plan);
                 scheduledPlanId = null;

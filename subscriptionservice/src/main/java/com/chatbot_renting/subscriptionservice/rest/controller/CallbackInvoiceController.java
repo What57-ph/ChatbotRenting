@@ -4,6 +4,7 @@ import com.chatbot_renting.subscriptionservice.dto.request.InvoiceStatusUpdateRe
 import com.chatbot_renting.subscriptionservice.dto.response.InvoiceStatusUpdateResponse;
 import com.chatbot_renting.subscriptionservice.rest.api.CallbackInvoiceApi;
 import com.chatbot_renting.subscriptionservice.service.InvoiceService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class CallbackInvoiceController implements CallbackInvoiceApi {
     private final InvoiceService invoiceService;
 
     @Override
-    public ResponseEntity<InvoiceStatusUpdateResponse> updateInvoiceStatus(Long invoiceId, InvoiceStatusUpdateRequest request) {
+    public ResponseEntity<InvoiceStatusUpdateResponse> updateInvoiceStatus(UUID invoiceId, InvoiceStatusUpdateRequest request) {
         log.info("Callback received to update invoice {} status to {}", invoiceId, request.getStatus());
         return ResponseEntity.ok(invoiceService.updateInvoiceStatus(invoiceId, request));
     }

@@ -1,11 +1,12 @@
 package com.chatbot_renting.subscriptionservice.dto.response;
 
 import lombok.Data;
+import java.util.UUID;
 import java.util.List;
 
 @Data
 public class SubscriptionPlanDto {
-    private Long id;
+    private UUID id;
     private String code;
     private String name;
     private String description;
