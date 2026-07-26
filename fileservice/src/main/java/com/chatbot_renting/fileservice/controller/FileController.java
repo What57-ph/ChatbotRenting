@@ -2,8 +2,8 @@ package com.chatbot_renting.fileservice.controller;
 
 import com.chatbot_renting.fileservice.domain.FileUploadResponse;
 import com.chatbot_renting.fileservice.service.FileService;
-import com.lecturemind.commonservice.domain.Response.ApiResponse;
-import com.lecturemind.commonservice.domain.Response.ResponseBuilder;
+import com.chatbot_renting.commonservice.domain.Response.ApiResponse;
+import com.chatbot_renting.commonservice.domain.Response.ResponseBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -2,7 +2,6 @@ package com.chatbotrenting.apigateway.filter;
 
 import com.chatbotrenting.apigateway.client.AuthClient;
 import com.chatbotrenting.apigateway.model.Token;
-import com.lecturemind.commonservice.domain.Response.ApiResponse;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -53,18 +52,17 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
             AuthClient authClient = context.getBean(AuthClient.class);
 
             return Mono.fromCallable(() -> {
-                        ResponseEntity<Long> response = authClient.validateToken(jwt);
-                        if (response == null){
-                            throw new FeignException.Unauthorized(
-                                    "Missing userId from auth-service",
-                                    null, null, null
-                            );
-                        }
-                        Long userId = response.getBody();
+                ResponseEntity<Long> response = authClient.validateToken(jwt);
+                if (response == null) {
+                    throw new FeignException.Unauthorized(
+                            "Missing userId from auth-service",
+                            null, null, null);
+                }
+                Long userId = response.getBody();
 
-                        log.debug("Token validated, userId: {}", userId);
-                        return userId;
-                    })
+                log.debug("Token validated, userId: {}", userId);
+                return userId;
+            })
                     .subscribeOn(Schedulers.boundedElastic())
                     .flatMap(userId -> {
                         // Inject X-User-Id so downstream services can identify the caller
@@ -90,7 +88,7 @@ public class JwtAuthenticationFilter extends AbstractGatewayFilterFactory<JwtAut
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Config{
+    public static class Config {
         private List<String> publicEndpoints;
     }
 }

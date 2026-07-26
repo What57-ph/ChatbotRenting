@@ -1,4 +1,4 @@
-package com.lecturemind.apigateway;
+package com.chatbot_renting.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

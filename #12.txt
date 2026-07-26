@@ -1,0 +1,936 @@
+Started by user admin
+Checking out git https://github.com/What57-ph/ChatbotRenting into /var/jenkins_home/workspace/chatbot-renting@script/9bafecd1eb1dccabdb9a7cdd7d5b41a0e0126621a20492cf7b6e00aa9317ecbe to read Jenkinsfile
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/chatbot-renting@script/9bafecd1eb1dccabdb9a7cdd7d5b41a0e0126621a20492cf7b6e00aa9317ecbe/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/What57-ph/ChatbotRenting # timeout=10
+Cleaning workspace
+ > git rev-parse --verify HEAD # timeout=10
+Resetting working tree
+ > git reset --hard # timeout=10
+ > git clean -fdx # timeout=10
+Fetching upstream changes from https://github.com/What57-ph/ChatbotRenting
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/What57-ph/ChatbotRenting +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/dev^{commit} # timeout=10
+Checking out Revision 40f93e905d6c916c0e619e70bcaf918b96bffb63 (refs/remotes/origin/dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 40f93e905d6c916c0e619e70bcaf918b96bffb63 # timeout=10
+Commit message: "refactor: service structure"
+ > git rev-list --no-walk dca1b883db4d8660c00a59e22d4ed8eb96abf32b # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/chatbot-renting
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/chatbot-renting/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/What57-ph/ChatbotRenting # timeout=10
+Cleaning workspace
+ > git rev-parse --verify HEAD # timeout=10
+Resetting working tree
+ > git reset --hard # timeout=10
+ > git clean -fdx # timeout=10
+Fetching upstream changes from https://github.com/What57-ph/ChatbotRenting
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/What57-ph/ChatbotRenting +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/dev^{commit} # timeout=10
+Checking out Revision 40f93e905d6c916c0e619e70bcaf918b96bffb63 (refs/remotes/origin/dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 40f93e905d6c916c0e619e70bcaf918b96bffb63 # timeout=10
+Commit message: "refactor: service structure"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/chatbot-renting/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/What57-ph/ChatbotRenting # timeout=10
+Cleaning workspace
+ > git rev-parse --verify HEAD # timeout=10
+Resetting working tree
+ > git reset --hard # timeout=10
+ > git clean -fdx # timeout=10
+Fetching upstream changes from https://github.com/What57-ph/ChatbotRenting
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/What57-ph/ChatbotRenting +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/dev^{commit} # timeout=10
+Checking out Revision 40f93e905d6c916c0e619e70bcaf918b96bffb63 (refs/remotes/origin/dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 40f93e905d6c916c0e619e70bcaf918b96bffb63 # timeout=10
+Commit message: "refactor: service structure"
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Commonservice)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/chatbot-renting/commonservice
+[Pipeline] {
+[Pipeline] sh
++ mvn clean install -DskipTests
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------< com.chatbot-renting:commonservice >------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ commonservice ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ commonservice ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ commonservice ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 24 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ commonservice ---
+[INFO] skip non existing resourceDirectory /var/jenkins_home/workspace/chatbot-renting/commonservice/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ commonservice ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ commonservice ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ commonservice ---
+[INFO] Building jar: /var/jenkins_home/workspace/chatbot-renting/commonservice/target/commonservice-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ commonservice ---
+[INFO] Installing /var/jenkins_home/workspace/chatbot-renting/commonservice/pom.xml to /var/jenkins_home/.m2/repository/com/chatbot-renting/commonservice/0.0.1-SNAPSHOT/commonservice-0.0.1-SNAPSHOT.pom
+[INFO] Installing /var/jenkins_home/workspace/chatbot-renting/commonservice/target/commonservice-0.0.1-SNAPSHOT.jar to /var/jenkins_home/.m2/repository/com/chatbot-renting/commonservice/0.0.1-SNAPSHOT/commonservice-0.0.1-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.484 s
+[INFO] Finished at: 2026-07-26T17:25:18Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Backend Services)
+[Pipeline] parallel
+[Pipeline] { (Branch: apigateway)
+[Pipeline] { (Branch: authservice)
+[Pipeline] { (Branch: coreservice)
+[Pipeline] { (Branch: discoveryserver)
+[Pipeline] { (Branch: fileservice)
+[Pipeline] { (Branch: notificationservice)
+[Pipeline] { (Branch: subscriptionservice)
+[Pipeline] stage
+[Pipeline] { (apigateway)
+[Pipeline] stage
+[Pipeline] { (authservice)
+[Pipeline] stage
+[Pipeline] { (coreservice)
+[Pipeline] stage
+[Pipeline] { (discoveryserver)
+[Pipeline] stage
+[Pipeline] { (fileservice)
+[Pipeline] stage
+[Pipeline] { (notificationservice)
+[Pipeline] stage
+[Pipeline] { (subscriptionservice)
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] envVarsForTool
+[Pipeline] envVarsForTool
+[Pipeline] envVarsForTool
+[Pipeline] envVarsForTool
+[Pipeline] envVarsForTool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/chatbot-renting/apigateway
+[Pipeline] {
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/chatbot-renting/authservice
+[Pipeline] {
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/chatbot-renting/coreservice
+[Pipeline] {
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/chatbot-renting/discoveryserver
+[Pipeline] {
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/chatbot-renting/fileservice
+[Pipeline] {
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/chatbot-renting/notificationservice
+[Pipeline] {
+[Pipeline] dir
+Running in /var/jenkins_home/workspace/chatbot-renting/subscriptionservice
+[Pipeline] {
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
++ mvn clean package -DskipTests
++ mvn clean package -DskipTests
++ mvn clean package -DskipTests
++ mvn clean package -DskipTests
++ mvn clean package -DskipTests
++ mvn clean package -DskipTests
++ mvn clean package -DskipTests
+[INFO] Scanning for projects...
+[INFO] Scanning for projects...
+[INFO] Scanning for projects...
+[INFO] Scanning for projects...
+[INFO] Scanning for projects...
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< com.chatbot-renting:apigateway >-------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] ----------------< com.chatbot-renting:discoveryserver >-----------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.chatbot-renting:authservice >-------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] ------------------< com.chatbot-renting:coreservice >-------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] ------------------< com.chatbot_renting:fileservice >-------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --------------< com.chatbot-renting:notificationservice >---------------
+[INFO] Building notificationservice 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --------------< com.chatbot-renting:subscriptionservice >---------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ apigateway ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ apigateway ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ apigateway ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 6 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ subscriptionservice ---
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ authservice ---
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ coreservice ---
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ fileservice ---
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ notificationservice ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ coreservice ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ subscriptionservice ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ fileservice ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ notificationservice ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ authservice ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ authservice ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ coreservice ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ subscriptionservice ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ fileservice ---
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ discoveryserver ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ discoveryserver ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ discoveryserver ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ notificationservice ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 28 source files with javac [debug parameters release 21] to target/classes
+[INFO] Compiling 5 source files with javac [debug parameters release 21] to target/classes
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 32 source files with javac [debug parameters release 21] to target/classes
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 75 source files with javac [debug parameters release 21] to target/classes
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target/classes
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 38 source files with javac [debug parameters release 21] to target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/apigateway/src/main/java/com/chatbotrenting/apigateway/filter/JwtAuthenticationFilter.java:[5,53] package com.lecturemind.commonservice.domain.Response does not exist
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.458 s
+[INFO] Finished at: 2026-07-26T17:25:37Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.0:compile (default-compile) on project apigateway: Compilation failure
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/apigateway/src/main/java/com/chatbotrenting/apigateway/filter/JwtAuthenticationFilter.java:[5,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[Pipeline] }
+[Pipeline] // dir
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ discoveryserver ---
+[INFO] skip non existing resourceDirectory /var/jenkins_home/workspace/chatbot-renting/discoveryserver/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ discoveryserver ---
+[Pipeline] }
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target/test-classes
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+Failed in branch apigateway
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ discoveryserver ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ discoveryserver ---
+[INFO] Building jar: /var/jenkins_home/workspace/chatbot-renting/discoveryserver/target/discoveryserver-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.0.5:repackage (repackage) @ discoveryserver ---
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/fileservice/src/main/java/com/chatbot_renting/fileservice/controller/FileController.java:[5,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/fileservice/src/main/java/com/chatbot_renting/fileservice/controller/FileController.java:[6,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/fileservice/src/main/java/com/chatbot_renting/fileservice/controller/FileController.java:[25,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.fileservice.controller.FileController
+[INFO] 3 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.018 s
+[INFO] Finished at: 2026-07-26T17:25:40Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile (default-compile) on project fileservice: Compilation failure: Compilation failure: 
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/fileservice/src/main/java/com/chatbot_renting/fileservice/controller/FileController.java:[5,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/fileservice/src/main/java/com/chatbot_renting/fileservice/controller/FileController.java:[6,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/fileservice/src/main/java/com/chatbot_renting/fileservice/controller/FileController.java:[25,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.fileservice.controller.FileController
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+Failed in branch fileservice
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[6,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[7,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/service/ChatbotService.java:[4,51] cannot find symbol
+  symbol:   class ResourceNotFoundException
+  location: package com.chatbot_renting.commonservice.exception
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[23,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[31,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[39,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[46,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[55,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[7,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[8,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/service/KnowledgeSourceService.java:[3,51] cannot find symbol
+  symbol:   class ResourceNotFoundException
+  location: package com.chatbot_renting.commonservice.exception
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[25,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.coreservice.controller.KnowledgeSourceController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[34,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.coreservice.controller.KnowledgeSourceController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[43,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.coreservice.controller.KnowledgeSourceController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[51,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.coreservice.controller.KnowledgeSourceController
+[INFO] 15 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.168 s
+[INFO] Finished at: 2026-07-26T17:25:41Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile (default-compile) on project coreservice: Compilation failure: Compilation failure: 
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[6,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[7,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/service/ChatbotService.java:[4,51] cannot find symbol
+[ERROR]   symbol:   class ResourceNotFoundException
+[ERROR]   location: package com.chatbot_renting.commonservice.exception
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[23,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[31,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[39,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[46,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/ChatbotController.java:[55,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.coreservice.controller.ChatbotController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[7,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[8,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/service/KnowledgeSourceService.java:[3,51] cannot find symbol
+[ERROR]   symbol:   class ResourceNotFoundException
+[ERROR]   location: package com.chatbot_renting.commonservice.exception
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[25,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.coreservice.controller.KnowledgeSourceController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[34,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.coreservice.controller.KnowledgeSourceController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[43,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.coreservice.controller.KnowledgeSourceController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/coreservice/src/main/java/com/chatbot_renting/coreservice/controller/KnowledgeSourceController.java:[51,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.coreservice.controller.KnowledgeSourceController
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[INFO] Replacing main artifact /var/jenkins_home/workspace/chatbot-renting/discoveryserver/target/discoveryserver-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /var/jenkins_home/workspace/chatbot-renting/discoveryserver/target/discoveryserver-0.0.1-SNAPSHOT.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  19.172 s
+[INFO] Finished at: 2026-07-26T17:25:44Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+Failed in branch coreservice
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/config/CustomAuthenticationEntryPoint.java:[5,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[4,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[5,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[15,5] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: interface com.chatbot_renting.authservice.mapper.UserMapper
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[17,5] cannot find symbol
+  symbol:   class ReqLoginDTO
+  location: interface com.chatbot_renting.authservice.mapper.UserMapper
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[3,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[4,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[5,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[6,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[7,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[8,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[18,61] cannot find symbol
+  symbol:   class SignupRequest
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[18,20] cannot find symbol
+  symbol:   class ApiResponse
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[24,65] cannot find symbol
+  symbol:   class ReqLoginDTO
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[24,20] cannot find symbol
+  symbol:   class ApiResponse
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[24,32] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[27,72] cannot find symbol
+  symbol:   class RefreshTokenRequest
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[27,20] cannot find symbol
+  symbol:   class ApiResponse
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[27,32] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[30,61] cannot find symbol
+  symbol:   class LogoutRequest
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[30,20] cannot find symbol
+  symbol:   class ApiResponse
+  location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[6,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[7,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[8,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[9,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[10,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[11,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[12,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[3,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[4,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[5,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[6,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[7,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[30,55] cannot find symbol
+  symbol:   class SignupRequest
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[30,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[50,59] cannot find symbol
+  symbol:   class ReqLoginDTO
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[50,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[50,39] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[57,66] cannot find symbol
+  symbol:   class RefreshTokenRequest
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[57,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[57,39] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[64,55] cannot find symbol
+  symbol:   class LogoutRequest
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[64,27] cannot find symbol
+  symbol:   class ApiResponse
+  location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[11,17] cannot find symbol
+  symbol:   class SignupRequest
+  location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[13,23] cannot find symbol
+  symbol:   class ReqLoginDTO
+  location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[13,5] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[15,30] cannot find symbol
+  symbol:   class RefreshTokenRequest
+  location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[15,5] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[17,17] cannot find symbol
+  symbol:   class LogoutRequest
+  location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[11,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[12,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[13,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[14,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[15,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[41,24] cannot find symbol
+  symbol:   class SignupRequest
+  location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[66,30] cannot find symbol
+  symbol:   class ReqLoginDTO
+  location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[66,12] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[87,37] cannot find symbol
+  symbol:   class RefreshTokenRequest
+  location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[87,12] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[106,24] cannot find symbol
+  symbol:   class LogoutRequest
+  location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[125,13] cannot find symbol
+  symbol:   class ResLoginDTO
+  location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[10,8] No implementation was created for UserMapper due to having a problem in the erroneous element ResLoginDTO. Hint: this often means that some other annotation processor was supposed to process the erroneous element. You can also enable MapStruct verbose mode by setting -Amapstruct.verbose=true as a compilation argument.
+[INFO] 62 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  18.368 s
+[INFO] Finished at: 2026-07-26T17:25:43Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile (default-compile) on project authservice: Compilation failure: Compilation failure: 
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/config/CustomAuthenticationEntryPoint.java:[5,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[4,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[5,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[15,5] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: interface com.chatbot_renting.authservice.mapper.UserMapper
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[17,5] cannot find symbol
+[ERROR]   symbol:   class ReqLoginDTO
+[ERROR]   location: interface com.chatbot_renting.authservice.mapper.UserMapper
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[3,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[4,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[5,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[6,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[7,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[8,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[18,61] cannot find symbol
+[ERROR]   symbol:   class SignupRequest
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[18,20] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[24,65] cannot find symbol
+[ERROR]   symbol:   class ReqLoginDTO
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[24,20] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[24,32] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[27,72] cannot find symbol
+[ERROR]   symbol:   class RefreshTokenRequest
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[27,20] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[27,32] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[30,61] cannot find symbol
+[ERROR]   symbol:   class LogoutRequest
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/api/AuthApi.java:[30,20] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: interface com.chatbot_renting.authservice.rest.api.AuthApi
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[6,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[7,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[8,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[9,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[10,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[11,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[12,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[3,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[4,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[5,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[6,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[7,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[30,55] cannot find symbol
+[ERROR]   symbol:   class SignupRequest
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[30,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[50,59] cannot find symbol
+[ERROR]   symbol:   class ReqLoginDTO
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[50,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[50,39] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[57,66] cannot find symbol
+[ERROR]   symbol:   class RefreshTokenRequest
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[57,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[57,39] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[64,55] cannot find symbol
+[ERROR]   symbol:   class LogoutRequest
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/rest/controller/AuthController.java:[64,27] cannot find symbol
+[ERROR]   symbol:   class ApiResponse
+[ERROR]   location: class com.chatbot_renting.authservice.rest.controller.AuthController
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[11,17] cannot find symbol
+[ERROR]   symbol:   class SignupRequest
+[ERROR]   location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[13,23] cannot find symbol
+[ERROR]   symbol:   class ReqLoginDTO
+[ERROR]   location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[13,5] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[15,30] cannot find symbol
+[ERROR]   symbol:   class RefreshTokenRequest
+[ERROR]   location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[15,5] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/AuthService.java:[17,17] cannot find symbol
+[ERROR]   symbol:   class LogoutRequest
+[ERROR]   location: interface com.chatbot_renting.authservice.service.AuthService
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[11,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[12,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[13,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[14,52] package com.lecturemind.commonservice.domain.Request does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[15,53] package com.lecturemind.commonservice.domain.Response does not exist
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[41,24] cannot find symbol
+[ERROR]   symbol:   class SignupRequest
+[ERROR]   location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[66,30] cannot find symbol
+[ERROR]   symbol:   class ReqLoginDTO
+[ERROR]   location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[66,12] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[87,37] cannot find symbol
+[ERROR]   symbol:   class RefreshTokenRequest
+[ERROR]   location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[87,12] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[106,24] cannot find symbol
+[ERROR]   symbol:   class LogoutRequest
+[ERROR]   location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/service/impl/AuthServiceImpl.java:[125,13] cannot find symbol
+[ERROR]   symbol:   class ResLoginDTO
+[ERROR]   location: class com.chatbot_renting.authservice.service.impl.AuthServiceImpl
+[ERROR] /var/jenkins_home/workspace/chatbot-renting/authservice/src/main/java/com/chatbot_renting/authservice/mapper/UserMapper.java:[10,8] No implementation was created for UserMapper due to having a problem in the erroneous element ResLoginDTO. Hint: this often means that some other annotation processor was supposed to process the erroneous element. You can also enable MapStruct verbose mode by setting -Amapstruct.verbose=true as a compilation argument.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ notificationservice ---
+[INFO] skip non existing resourceDirectory /var/jenkins_home/workspace/chatbot-renting/notificationservice/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ notificationservice ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug parameters release 21] to target/test-classes
+[Pipeline] // stage
+[Pipeline] }
+Failed in branch authservice
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ notificationservice ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ notificationservice ---
+[INFO] Building jar: /var/jenkins_home/workspace/chatbot-renting/notificationservice/target/notificationservice-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.0.6:repackage (repackage) @ notificationservice ---
+[INFO] Replacing main artifact /var/jenkins_home/workspace/chatbot-renting/notificationservice/target/notificationservice-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to /var/jenkins_home/workspace/chatbot-renting/notificationservice/target/notificationservice-0.0.1-SNAPSHOT.jar.original
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  22.959 s
+[INFO] Finished at: 2026-07-26T17:25:48Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[WARNING] /var/jenkins_home/workspace/chatbot-renting/subscriptionservice/src/main/java/com/chatbot_renting/subscriptionservice/mapper/OrderMapper.java:[9,14] Unmapped target properties: "plan, invoice".
+[WARNING] /var/jenkins_home/workspace/chatbot-renting/subscriptionservice/src/main/java/com/chatbot_renting/subscriptionservice/mapper/SubscriptionMapper.java:[9,21] Unmapped target property: "scheduledPlan".
+[WARNING] /var/jenkins_home/workspace/chatbot-renting/subscriptionservice/src/main/java/com/chatbot_renting/subscriptionservice/mapper/UsageSummaryMapper.java:[9,21] Unmapped target properties: "tokensLimit, tokensPercent, storageLimitMb, storagePercent, chatbotLimit".
+[WARNING] /var/jenkins_home/workspace/chatbot-renting/subscriptionservice/src/main/java/com/chatbot_renting/subscriptionservice/mapper/InvoiceMapper.java:[10,16] Unmapped target properties: "plan, invoice". Mapping from property "Order order" to "OrderDto order".
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ subscriptionservice ---
+[INFO] skip non existing resourceDirectory /var/jenkins_home/workspace/chatbot-renting/subscriptionservice/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ subscriptionservice ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 6 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.5:test (default-test) @ subscriptionservice ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ subscriptionservice ---
+[INFO] Building jar: /var/jenkins_home/workspace/chatbot-renting/subscriptionservice/target/subscriptionservice-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.0.6:repackage (repackage) @ subscriptionservice ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  24.355 s
+[INFO] Finished at: 2026-07-26T17:25:49Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.0.6:repackage (repackage) on project subscriptionservice: Execution repackage of goal org.springframework.boot:spring-boot-maven-plugin:4.0.6:repackage failed: Unable to find main class -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginExecutionException
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+Failed in branch subscriptionservice
+[Pipeline] // parallel
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Web App)
+Stage "Build Web App" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Setup Chatbot Platform)
+Stage "Setup Chatbot Platform" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Pipeline finished!
+[Pipeline] echo
+Build Failed! Vui lòng kiểm tra lại log.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE
