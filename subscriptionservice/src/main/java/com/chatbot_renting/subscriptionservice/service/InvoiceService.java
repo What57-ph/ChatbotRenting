@@ -1,16 +1,8 @@
 package com.chatbot_renting.subscriptionservice.service;
 
-import com.chatbot_renting.subscriptionservice.entity.Invoice;
-import com.chatbot_renting.subscriptionservice.entity.Order;
+import com.chatbot_renting.subscriptionservice.dto.request.InvoiceStatusUpdateRequest;
+import com.chatbot_renting.subscriptionservice.dto.response.InvoiceStatusUpdateResponse;
 
 public interface InvoiceService {
-    Invoice createInvoice(Order order);
-
-    Invoice markPaid(Invoice invoice);
-
-    Invoice markRefund(Invoice invoice);
-
-    Invoice getByOrderId(Long orderId);
-
-    String generateInvoiceNumber();
+    InvoiceStatusUpdateResponse updateInvoiceStatus(Long invoiceId, InvoiceStatusUpdateRequest request);
 }

@@ -1,189 +1,179 @@
 package com.chatbot_renting.subscriptionservice.service.impl;
 
-import com.chatbot_renting.subscriptionservice.dto.request.PlanFeature.CreatePlanFeatureRequest;
-import com.chatbot_renting.subscriptionservice.dto.request.SubscriptionPlan.CreateSubscriptionPlanRequest;
-import com.chatbot_renting.subscriptionservice.dto.request.SubscriptionPlan.UpdateSubscriptionPlanRequest;
-import com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanResponse;
+import com.chatbot_renting.commonservice.exception.AppError;
+import com.chatbot_renting.commonservice.exception.AppNotFoundException;
+import com.chatbot_renting.subscriptionservice.dto.request.PlanFeatureRequest;
+import com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanDto;
+
 import com.chatbot_renting.subscriptionservice.entity.PlanFeature;
 import com.chatbot_renting.subscriptionservice.entity.SubscriptionPlan;
+import com.chatbot_renting.subscriptionservice.exception.code.SubscriptionErrorCode;
 import com.chatbot_renting.subscriptionservice.mapper.SubscriptionPlanMapper;
 import com.chatbot_renting.subscriptionservice.repository.SubscriptionPlanRepository;
-import com.chatbot_renting.subscriptionservice.repository.SubscriptionRepository;
-import com.chatbot_renting.subscriptionservice.service.PlanFeatureService;
 import com.chatbot_renting.subscriptionservice.service.SubscriptionPlanService;
-import com.lecturemind.commonservice.exception.ExistException;
-import com.lecturemind.commonservice.exception.NotFoundException;
+import com.chatbot_renting.subscriptionservice.utils.PlanUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
 
     private final SubscriptionPlanRepository planRepository;
-    private final SubscriptionRepository subscriptionRepository;
-    private final PlanFeatureService planFeatureService;
-    private final SubscriptionPlanMapper mapper;
+    private final SubscriptionPlanMapper planMapper;
+    private final PlanUtils planUtils;
 
     @Override
-    @Transactional
-    public SubscriptionPlanResponse createSubscriptionPlan(CreateSubscriptionPlanRequest request) {
+    public List<SubscriptionPlanDto> getActivePlans() {
+        log.info("Starting getActivePlans");
+        try {
+            List<SubscriptionPlanDto> plans = planRepository.findByActiveTrue().stream()
+                    .sorted(planUtils.monthlyPriceComparator())
+                    .map(planMapper::toDto)
+                    .collect(Collectors.toList());
+            log.info("Completed getActivePlans - count={}", plans.size());
+            return plans;
+        } catch (Exception e) {
+            log.error("Error in getActivePlans", e);
+            throw e;
+        }
+    }
 
-        validateCodeUnique(request.getCode());
-        validatePricing(request);
+    @Override
+    public SubscriptionPlanDto getPlan(Long planId) {
+        log.info("Starting getPlan - planId={}", planId);
+        try {
+            SubscriptionPlanDto dto = planRepository.findById(planId)
+                    .map(planMapper::toDto)
+                    .orElseThrow(() -> new AppNotFoundException(
+                            new AppError(SubscriptionErrorCode.PLAN_NOT_FOUND, "Plan ID: " + planId)
+                    ));
+            log.info("Completed getPlan - planId={}", planId);
+            return dto;
+        } catch (Exception e) {
+            log.error("Error in getPlan - planId={}", planId, e);
+            throw e;
+        }
+    }
+
+    @Override
+    public List<SubscriptionPlanDto> getAllPlans() {
+        log.info("Starting getAllPlans");
+        try {
+            List<SubscriptionPlanDto> plans = planRepository.findAll().stream()
+                    .sorted(planUtils.monthlyPriceComparator())
+                    .map(planMapper::toDto)
+                    .collect(Collectors.toList());
+            log.info("Completed getAllPlans - count={}", plans.size());
+            return plans;
+        } catch (Exception e) {
+            log.error("Error in getAllPlans", e);
+            throw e;
+        }
+    }
+
+    @Override
+    public SubscriptionPlanDto createPlan(com.chatbot_renting.subscriptionservice.dto.request.SubscriptionPlanCreateRequest request) {
+        log.info("Starting createPlan - code={}", request.getCode());
+        if (planRepository.existsByCode(request.getCode())) {
+            throw new com.chatbot_renting.commonservice.exception.AppBadRequestException(
+                    new AppError(SubscriptionErrorCode.PLAN_CODE_ALREADY_EXISTS));
+        }
+
         validateFeatures(request.getFeatures());
 
-        SubscriptionPlan plan = mapper.toEntity(request);
+        SubscriptionPlan plan = SubscriptionPlan.builder()
+                .code(request.getCode())
+                .name(request.getName())
+                .description(request.getDescription())
+                .maxChatbots(request.getMaxChatbots())
+                .maxStorageMb(request.getMaxStorageMb())
+                .maxMonthlyTokens(request.getMaxMonthlyTokens())
+                .durationMonths(request.getDurationMonths())
+                .trialDays(request.getTrialDays())
+                .active(true)
+                .build();
+        
+        List<PlanFeature> features = mapFeatures(request.getFeatures(), plan);
+        plan.setFeatures(features);
 
-        attachFeatures(plan);
-        planFeatureService.saveAllPlanFeatures(request.getFeatures());
-        SubscriptionPlan saved = planRepository.save(plan);
-
-        return mapper.toResponse(saved);
+        SubscriptionPlan savedPlan = planRepository.save(plan);
+        log.info("Completed createPlan - new planId={}", savedPlan.getId());
+        return planMapper.toDto(savedPlan);
     }
 
     @Override
-    @Transactional
-    public SubscriptionPlanResponse updateSubscriptionPlan(Long id,
-                                               UpdateSubscriptionPlanRequest request) {
+    public SubscriptionPlanDto updatePlan(Long planId, com.chatbot_renting.subscriptionservice.dto.request.SubscriptionPlanUpdateRequest request) {
+        log.info("Starting updatePlan - planId={}", planId);
+        SubscriptionPlan existingPlan = planRepository.findById(planId)
+                .orElseThrow(() -> new AppNotFoundException(
+                        new AppError(SubscriptionErrorCode.PLAN_NOT_FOUND, "Plan ID: " + planId)
+                ));
 
-        SubscriptionPlan plan = findPlanById(id);
-
-        validateUpdatePricing(request);
-
-        plan.setName(request.getName() != null ? request.getName() : plan.getName());
-        plan.setDescription(request.getDescription() != null ? request.getDescription() : plan.getDescription());
-        plan.setMonthlyPrice(request.getMonthlyPrice() != null ? request.getMonthlyPrice() : plan.getMonthlyPrice());
-        plan.setYearlyPrice(request.getYearlyPrice() != null ? request.getYearlyPrice() : plan.getYearlyPrice());
-        plan.setMaxChatbots(request.getMaxChatbots() != null ? request.getMaxChatbots() : plan.getMaxChatbots());
-        plan.setMaxFiles(request.getMaxFiles() != null ? request.getMaxFiles() : plan.getMaxFiles());
-        plan.setMaxStorageMb(request.getMaxStorageMb() != null ? request.getMaxStorageMb() : plan.getMaxStorageMb());
-        plan.setMaxMonthlyTokens(request.getMaxMonthlyTokens() != null ? request.getMaxMonthlyTokens() : plan.getMaxMonthlyTokens());
-        plan.setActive(request.getActive() != null ? request.getActive() : plan.getActive());
-
-        if (request.getFeatures() != null) {
-            plan.getFeatures().clear();
-            List<PlanFeature> newFeatures = request.getFeatures()
-                    .stream()
-                    .map(f -> {
-                        PlanFeature feature = new PlanFeature();
-                        feature.setFeatureKey(f.getFeatureKey());
-                        feature.setFeatureValue(f.getFeatureValue());
-                        feature.setPlan(plan);
-                        return feature;
-                    }).toList();
-
-            plan.getFeatures().addAll(newFeatures);
+        if (request.getFeatures() != null && !request.getFeatures().isEmpty()) {
+            validateFeatures(request.getFeatures());
+            existingPlan.getFeatures().clear();
+            existingPlan.getFeatures().addAll(mapFeatures(request.getFeatures(), existingPlan));
         }
 
-        return mapper.toResponse(plan);
+        SubscriptionPlan updatedPlan = existingPlan.toBuilder()
+                .name(request.getName())
+                .description(request.getDescription())
+                .maxChatbots(request.getMaxChatbots())
+                .maxStorageMb(request.getMaxStorageMb())
+                .maxMonthlyTokens(request.getMaxMonthlyTokens())
+                .durationMonths(request.getDurationMonths())
+                .trialDays(request.getTrialDays())
+                .active(request.getActive())
+                .build();
+
+        // Note: We need a notification dispatched here (Implementation planned for next phase)
+        log.info("[FUTURE PHASE] Dispatch notification: Plan updated for planId={}", planId);
+
+        SubscriptionPlan savedPlan = planRepository.save(updatedPlan);
+        log.info("Completed updatePlan - planId={}", planId);
+        return planMapper.toDto(savedPlan);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public SubscriptionPlanResponse getSubscriptionPlan(Long id) {
-        return mapper.toResponse(findPlanById(id));
+    public void softDeletePlan(Long planId) {
+        log.info("Starting softDeletePlan - planId={}", planId);
+        SubscriptionPlan existingPlan = planRepository.findById(planId)
+                .orElseThrow(() -> new AppNotFoundException(
+                        new AppError(SubscriptionErrorCode.PLAN_NOT_FOUND, "Plan ID: " + planId)
+                ));
+
+        SubscriptionPlan updatedPlan = existingPlan.toBuilder().active(false).build();
+        planRepository.save(updatedPlan);
+        log.info("Completed softDeletePlan - planId={}", planId);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<SubscriptionPlanResponse> getAllSubscriptionPlans() {
-        return planRepository.findAll()
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<SubscriptionPlanResponse> getActiveSubscriptionPlans() {
-        return planRepository.findByActiveTrue()
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
-    }
-
-    @Override
-    @Transactional
-    public SubscriptionPlanResponse activatePlan(Long id) {
-        SubscriptionPlan plan = findPlanById(id);
-        plan.setActive(true);
-        return mapper.toResponse(plan);
-    }
-
-    @Override
-    @Transactional
-    public SubscriptionPlanResponse deactivatePlan(Long id) {
-
-        SubscriptionPlan plan = findPlanById(id);
-
-        if (subscriptionRepository.existsByPlanId(id)) {
-            throw new ExistException("SUBSCRIPTION_PLAN_EXISTS");
+    private void validateFeatures(List<PlanFeatureRequest> features) {
+        if (features == null || features.isEmpty()) {
+            throw new com.chatbot_renting.commonservice.exception.AppBadRequestException(
+                    new AppError(SubscriptionErrorCode.PLAN_MISSING_PRICE));
         }
-
-        plan.setActive(false);
-        return mapper.toResponse(plan);
-    }
-
-    @Override
-    @Transactional
-    public SubscriptionPlanResponse deletePlan(Long id) {
-        return deactivatePlan(id);
-
-    }
-
-
-    private SubscriptionPlan findPlanById(Long id) {
-        return planRepository.findById(id)
-                .orElseThrow(() ->
-                        new NotFoundException("Subscription plan not found"));
-    }
-
-    private void validateCodeUnique(String code) {
-        if (planRepository.existsByCode(code)) {
-            throw new ExistException("PLAN_CODE_EXISTS");
+        boolean hasMonthly = features.stream().anyMatch(f -> com.chatbot_renting.subscriptionservice.utils.PlanFeatureKeys.MONTHLY_PRICE.equals(f.getFeatureKey()));
+        boolean hasYearly = features.stream().anyMatch(f -> com.chatbot_renting.subscriptionservice.utils.PlanFeatureKeys.YEARLY_PRICE.equals(f.getFeatureKey()));
+        
+        if (!hasMonthly || !hasYearly) {
+            throw new com.chatbot_renting.commonservice.exception.AppBadRequestException(
+                    new AppError(SubscriptionErrorCode.PLAN_MISSING_PRICE));
         }
     }
 
-    private void validatePricing(CreateSubscriptionPlanRequest request) {
-        if (request.getMonthlyPrice().compareTo(request.getYearlyPrice()) < 0) {
-
-            if (request.getYearlyPrice()
-                    .compareTo(request.getMonthlyPrice().multiply(java.math.BigDecimal.valueOf(12))) > 0) {
-                throw new RuntimeException("INVALID_YEARLY_PRICE");
-            }
-        }
-    }
-
-    private void validateUpdatePricing(UpdateSubscriptionPlanRequest request) {
-        if (request.getMonthlyPrice() != null && request.getYearlyPrice() != null) {
-            if (request.getYearlyPrice()
-                    .compareTo(request.getMonthlyPrice().multiply(java.math.BigDecimal.valueOf(12))) > 0) {
-                throw new RuntimeException("INVALID_YEARLY_PRICE");
-            }
-        }
-    }
-
-    private void validateFeatures(List<CreatePlanFeatureRequest> features) {
-        if (features == null) return;
-
-        Set<String> keys = new HashSet<>();
-
-        for (CreatePlanFeatureRequest f : features) {
-            if (!keys.add(f.getFeatureKey())) {
-                throw new RuntimeException("DUPLICATE_FEATURE_KEY");
-            }
-        }
-    }
-
-    private void attachFeatures(SubscriptionPlan plan) {
-        if (plan.getFeatures() == null) return;
-
-        plan.getFeatures().forEach(f -> f.setPlan(plan));
+    private List<PlanFeature> mapFeatures(
+            List<PlanFeatureRequest> requests, 
+            SubscriptionPlan plan) {
+        return requests.stream().map(req -> PlanFeature.builder()
+                .plan(plan)
+                .featureKey(req.getFeatureKey())
+                .featureValue(req.getFeatureValue())
+                .build()).collect(Collectors.toList());
     }
 }

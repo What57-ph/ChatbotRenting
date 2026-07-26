@@ -1,10 +1,13 @@
 package com.chatbot_renting.subscriptionservice.entity.enums;
 
 public enum SubscriptionStatus {
-    PENDING,
+    INCOMPLETE,
+    INCOMPLETE_EXPIRED,
     ACTIVE,
+    TRIALING,
+    PAUSED,
     PAST_DUE,
-    EXPIRED,
-    CANCELLED,
-    TRIAL
+    UNPAID,
+    CANCELED,
+    EXPIRED
 }

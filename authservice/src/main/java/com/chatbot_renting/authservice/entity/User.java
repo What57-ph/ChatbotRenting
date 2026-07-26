@@ -1,0 +1,59 @@
+package com.chatbot_renting.authservice.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "users")
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    UUID id;
+
+    String email;
+    String password;
+    String fullName;
+    String avatarUrl;
+    boolean isActive;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonIgnoreProperties({"users", "roles"})
+    List<Role> roles;
+
+    @Column(name = "refresh_token", length = 1000)
+    String refreshToken;
+
+    @Column(name = "updated_at")
+    Instant updatedAt;
+
+    @Column(name = "created_at")
+    Instant createdAt;
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    @PrePersist
+    public void handleBeforeCreate() {
+        this.createdAt = Instant.now();
+    }
+
+    @PreUpdate
+    public void handleBeforeUpdate() {
+        this.updatedAt = Instant.now();
+    }
+}
