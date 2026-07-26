@@ -89,14 +89,14 @@ pipeline {
         // }
 
         // Build Chatbot Platform (Python)
-        stage('Setup Chatbot Platform') {
-            steps {
-                dir('chatbot-platform') {
+        // stage('Setup Chatbot Platform') {
+        //     steps {
+        //         dir('chatbot-platform') {
        
-                    sh 'pip install -r requirements.txt'
-                }
-            }
-        }
+        //             sh 'pip install -r requirements.txt'
+        //         }
+        //     }
+        // }
     }
 
     post {
