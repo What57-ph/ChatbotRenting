@@ -1,10 +1,11 @@
 package com.chatbot_renting.subscriptionservice.dto.response;
 
 import lombok.Data;
+import java.util.UUID;
 
 @Data
 public class CurrentSubscriptionResponse {
-    private Long id;
+    private UUID id;
     private String status;
     private Boolean autoRenew;
     private String startDate;

@@ -10,6 +10,7 @@ import com.chatbot_renting.subscriptionservice.exception.code.SubscriptionErrorC
 import com.chatbot_renting.subscriptionservice.mapper.OrderMapper;
 import com.chatbot_renting.subscriptionservice.repository.OrderRepository;
 import com.chatbot_renting.subscriptionservice.service.OrderService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -28,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
 
     @Override
-    public PagedResponse<OrderDto> getUserOrders(Long userId, int page, int limit, String status) {
+    public PagedResponse<OrderDto> getUserOrders(UUID userId, int page, int limit, String status) {
         log.info("Starting getUserOrders - userId={}, page={}, limit={}, status={}", userId, page, limit, status);
         try {
             Page<Order> orderPage;
@@ -56,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto getOrder(Long userId, Long orderId) {
+    public OrderDto getOrder(UUID userId, UUID orderId) {
         log.info("Starting getOrder - userId={}, orderId={}", userId, orderId);
         try {
             Order order = orderRepository.findById(orderId)

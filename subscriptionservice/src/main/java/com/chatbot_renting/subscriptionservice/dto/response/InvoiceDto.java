@@ -1,11 +1,12 @@
 package com.chatbot_renting.subscriptionservice.dto.response;
 
 import lombok.Data;
+import java.util.UUID;
 import java.time.LocalDateTime;
 
 @Data
 public class InvoiceDto {
-    private Long id;
+    private UUID id;
     private String invoiceNumber;
     private Double amount;
     private String currency;

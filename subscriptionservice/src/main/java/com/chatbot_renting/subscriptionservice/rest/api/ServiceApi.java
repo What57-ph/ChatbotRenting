@@ -5,6 +5,7 @@ import com.chatbot_renting.subscriptionservice.dto.request.UsageRecordRequest;
 import com.chatbot_renting.subscriptionservice.dto.response.SubscriptionDto;
 import com.chatbot_renting.subscriptionservice.dto.response.UsageCheckResponse;
 import jakarta.validation.Valid;
+import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public interface ServiceApi {
 
     @GetMapping("/users/{userId}/subscriptions/current")
-    ResponseEntity<SubscriptionDto> getCurrentSubscription(@PathVariable("userId") Long userId);
+    ResponseEntity<SubscriptionDto> getCurrentSubscription(@PathVariable("userId") UUID userId);
 
     @PostMapping("/usage/record")
     ResponseEntity<Void> recordUsage(@Valid @RequestBody UsageRecordRequest request);

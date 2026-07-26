@@ -12,6 +12,7 @@ import com.chatbot_renting.subscriptionservice.mapper.SubscriptionPlanMapper;
 import com.chatbot_renting.subscriptionservice.repository.SubscriptionPlanRepository;
 import com.chatbot_renting.subscriptionservice.service.SubscriptionPlanService;
 import com.chatbot_renting.subscriptionservice.utils.PlanUtils;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
     }
 
     @Override
-    public SubscriptionPlanDto getPlan(Long planId) {
+    public SubscriptionPlanDto getPlan(UUID planId) {
         log.info("Starting getPlan - planId={}", planId);
         try {
             SubscriptionPlanDto dto = planRepository.findById(planId)
@@ -108,7 +109,7 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
     }
 
     @Override
-    public SubscriptionPlanDto updatePlan(Long planId, com.chatbot_renting.subscriptionservice.dto.request.SubscriptionPlanUpdateRequest request) {
+    public SubscriptionPlanDto updatePlan(UUID planId, com.chatbot_renting.subscriptionservice.dto.request.SubscriptionPlanUpdateRequest request) {
         log.info("Starting updatePlan - planId={}", planId);
         SubscriptionPlan existingPlan = planRepository.findById(planId)
                 .orElseThrow(() -> new AppNotFoundException(
@@ -141,7 +142,7 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
     }
 
     @Override
-    public void softDeletePlan(Long planId) {
+    public void softDeletePlan(UUID planId) {
         log.info("Starting softDeletePlan - planId={}", planId);
         SubscriptionPlan existingPlan = planRepository.findById(planId)
                 .orElseThrow(() -> new AppNotFoundException(

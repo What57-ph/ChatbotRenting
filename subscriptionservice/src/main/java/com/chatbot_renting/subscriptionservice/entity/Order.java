@@ -6,6 +6,7 @@ import com.chatbot_renting.subscriptionservice.entity.enums.OrderType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -21,7 +22,7 @@ public class Order extends BaseEntity {
     private Subscription subscription;
 
     @Column(nullable = false)
-    private Long userId;
+    private UUID userId;
 
     @Column(nullable = false, unique = true)
     private String orderNumber;

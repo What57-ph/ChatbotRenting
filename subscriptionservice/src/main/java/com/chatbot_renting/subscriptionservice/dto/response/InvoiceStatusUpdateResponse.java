@@ -1,10 +1,11 @@
 package com.chatbot_renting.subscriptionservice.dto.response;
 
 import lombok.Data;
+import java.util.UUID;
 
 @Data
 public class InvoiceStatusUpdateResponse {
-    private Long invoiceId;
+    private UUID invoiceId;
     private String invoiceStatus;
     private String orderStatus;
     private String subscriptionStatus;

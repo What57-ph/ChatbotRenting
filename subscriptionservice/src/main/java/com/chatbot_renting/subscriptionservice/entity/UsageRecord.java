@@ -12,6 +12,8 @@ import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.UUID;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
@@ -26,7 +28,7 @@ public class UsageRecord extends BaseEntity {
     private Subscription subscription;
 
     @Column(nullable = false)
-    private Long userId;
+    private UUID userId;
 
     private String botId;
 

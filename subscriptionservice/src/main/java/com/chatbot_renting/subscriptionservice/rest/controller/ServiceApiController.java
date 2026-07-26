@@ -7,6 +7,7 @@ import com.chatbot_renting.subscriptionservice.dto.response.UsageCheckResponse;
 import com.chatbot_renting.subscriptionservice.rest.api.ServiceApi;
 import com.chatbot_renting.subscriptionservice.service.SubscriptionService;
 import com.chatbot_renting.subscriptionservice.service.UsageService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class ServiceApiController implements ServiceApi {
     private final UsageService usageService;
 
     @Override
-    public ResponseEntity<SubscriptionDto> getCurrentSubscription(Long userId) {
+    public ResponseEntity<SubscriptionDto> getCurrentSubscription(UUID userId) {
         log.info("Service getting current subscription for user {}", userId);
         return ResponseEntity.ok(subscriptionService.getSubscriptionByUserId(userId));
     }

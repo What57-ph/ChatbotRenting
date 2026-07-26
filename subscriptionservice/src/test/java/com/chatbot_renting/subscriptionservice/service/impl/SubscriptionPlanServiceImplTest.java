@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -41,15 +42,20 @@ class SubscriptionPlanServiceImplTest {
 
     private SubscriptionPlanCreateRequest validCreateReq;
 
+    // Khai báo biến ID dùng chung cho các bài test
+    private UUID planId;
+
     @BeforeEach
     void setUp() {
+        planId = UUID.randomUUID(); // Khởi tạo ID cố định cho mỗi lần chạy test
+
         validCreateReq = new SubscriptionPlanCreateRequest();
         validCreateReq.setCode("BASIC");
         validCreateReq.setName("Basic Plan");
         validCreateReq.setMaxChatbots(10);
         validCreateReq.setMaxMonthlyTokens(5000);
         validCreateReq.setMaxStorageMb(1024);
-        
+
         PlanFeatureRequest feat1 = new PlanFeatureRequest();
         feat1.setFeatureKey(PlanFeatureKeys.MONTHLY_PRICE);
         feat1.setFeatureValue("10");
@@ -67,7 +73,7 @@ class SubscriptionPlanServiceImplTest {
         when(planRepository.existsByCode("BASIC")).thenReturn(false);
         when(planRepository.save(any(SubscriptionPlan.class))).thenAnswer(i -> {
             SubscriptionPlan p = i.getArgument(0);
-            p.setId(1L);
+            p.setId(UUID.randomUUID()); // Ở đây dùng UUID.randomUUID() là hợp lý vì giả lập DB tự sinh ID
             return p;
         });
 
@@ -75,10 +81,10 @@ class SubscriptionPlanServiceImplTest {
         planService.createPlan(validCreateReq);
 
         // Assert
-        verify(planRepository).save(argThat(plan -> 
-            plan.getCode().equals("BASIC") &&
-            plan.getFeatures().size() == 2 &&
-            plan.getActive()
+        verify(planRepository).save(argThat(plan ->
+                plan.getCode().equals("BASIC") &&
+                        plan.getFeatures().size() == 2 &&
+                        plan.getActive()
         ));
     }
 
@@ -105,22 +111,24 @@ class SubscriptionPlanServiceImplTest {
     @Test
     void updatePlan_UnlockedAttributes_SavesSuccessfully() {
         // Arrange
-        SubscriptionPlan activePlan = SubscriptionPlan.builder().id(1L).active(true).build();
-        when(planRepository.findById(1L)).thenReturn(Optional.of(activePlan));
-        
+        SubscriptionPlan activePlan = SubscriptionPlan.builder().id(planId).active(true).build();
+
+        // Sử dụng biến planId đã khởi tạo thay vì tạo mới
+        when(planRepository.findById(planId)).thenReturn(Optional.of(activePlan));
+
         SubscriptionPlanUpdateRequest updateReq = new SubscriptionPlanUpdateRequest();
         updateReq.setName("Basic V2");
         updateReq.setActive(false);
         updateReq.setMaxChatbots(20);
-        
+
         // Act
-        planService.updatePlan(1L, updateReq);
+        planService.updatePlan(planId, updateReq);
 
         // Assert
-        verify(planRepository).save(argThat(plan -> 
-            plan.getName().equals("Basic V2") &&
-            !plan.getActive() &&
-            plan.getMaxChatbots() == 20
+        verify(planRepository).save(argThat(plan ->
+                plan.getName().equals("Basic V2") &&
+                        !plan.getActive() &&
+                        plan.getMaxChatbots() == 20
         ));
     }
 
@@ -129,7 +137,7 @@ class SubscriptionPlanServiceImplTest {
         when(planRepository.findByActiveTrue()).thenReturn(Collections.singletonList(new SubscriptionPlan()));
         when(planMapper.toDto(any(SubscriptionPlan.class))).thenReturn(new com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanDto());
         when(planUtils.monthlyPriceComparator()).thenReturn(java.util.Comparator.comparing(dto -> 0.0));
-        
+
         java.util.List<com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanDto> result = planService.getActivePlans();
         assertFalse(result.isEmpty());
     }
@@ -139,33 +147,36 @@ class SubscriptionPlanServiceImplTest {
         when(planRepository.findAll()).thenReturn(Collections.singletonList(new SubscriptionPlan()));
         when(planMapper.toDto(any(SubscriptionPlan.class))).thenReturn(new com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanDto());
         when(planUtils.monthlyPriceComparator()).thenReturn(java.util.Comparator.comparing(dto -> 0.0));
-        
+
         java.util.List<com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanDto> result = planService.getAllPlans();
         assertFalse(result.isEmpty());
     }
 
     @Test
     void getPlan_Exists_ReturnsDto() {
-        when(planRepository.findById(1L)).thenReturn(Optional.of(new SubscriptionPlan()));
+        // Sử dụng planId
+        when(planRepository.findById(planId)).thenReturn(Optional.of(new SubscriptionPlan()));
         when(planMapper.toDto(any(SubscriptionPlan.class))).thenReturn(new com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanDto());
-        
-        com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanDto result = planService.getPlan(1L);
+
+        com.chatbot_renting.subscriptionservice.dto.response.SubscriptionPlanDto result = planService.getPlan(planId);
         assertNotNull(result);
     }
 
     @Test
     void getPlan_NotFound_ThrowsException() {
-        when(planRepository.findById(1L)).thenReturn(Optional.empty());
-        assertThrows(com.chatbot_renting.commonservice.exception.AppNotFoundException.class, () -> planService.getPlan(1L));
+        // Sử dụng planId
+        when(planRepository.findById(planId)).thenReturn(Optional.empty());
+        assertThrows(com.chatbot_renting.commonservice.exception.AppNotFoundException.class, () -> planService.getPlan(planId));
     }
 
     @Test
     void softDeletePlan_Success() {
-        SubscriptionPlan plan = SubscriptionPlan.builder().id(1L).active(true).build();
-        when(planRepository.findById(1L)).thenReturn(Optional.of(plan));
-        
-        planService.softDeletePlan(1L);
-        
+        // Sử dụng planId
+        SubscriptionPlan plan = SubscriptionPlan.builder().id(planId).active(true).build();
+        when(planRepository.findById(planId)).thenReturn(Optional.of(plan));
+
+        planService.softDeletePlan(planId);
+
         verify(planRepository).save(argThat(p -> !p.getActive()));
     }
 }

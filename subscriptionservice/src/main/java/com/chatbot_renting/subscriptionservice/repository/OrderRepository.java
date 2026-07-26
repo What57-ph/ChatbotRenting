@@ -9,10 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
-    Page<Order> findByUserIdOrderByCreatedAtDesc(Long userId, Pageable pageable);
-    Page<Order> findByUserIdAndStatusOrderByCreatedAtDesc(Long userId, OrderStatus status, Pageable pageable);
-    boolean existsBySubscriptionIdAndOrderTypeAndStatus(Long subscriptionId, OrderType orderType, OrderStatus status);
+public interface OrderRepository extends JpaRepository<Order, UUID> {
+    Page<Order> findByUserIdOrderByCreatedAtDesc(UUID userId, Pageable pageable);
+    Page<Order> findByUserIdAndStatusOrderByCreatedAtDesc(UUID userId, OrderStatus status, Pageable pageable);
+    boolean existsBySubscriptionIdAndOrderTypeAndStatus(UUID subscriptionId, OrderType orderType, OrderStatus status);
 }

@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 public class Subscription extends BaseEntity {
 
     @Column(nullable = false)
-    private Long userId;
+    private UUID userId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -33,7 +34,7 @@ public class Subscription extends BaseEntity {
     private SubscriptionPlan previousPlan;
 
     /** Lưu planId dự kiến cho lần gia hạn tiếp (downgrade scheduling) */
-    private Long scheduledPlanId;
+    private UUID scheduledPlanId;
 
     /**
      * Chu kỳ thanh toán hiện tại của subscription.

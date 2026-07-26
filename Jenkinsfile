@@ -1,11 +1,10 @@
 pipeline {
     agent any
 
-    // Định nghĩa các công cụ cần thiết (Cần cài đặt trong Manage Jenkins -> Global Tool Configuration)
     tools {
-        maven 'Maven 3'
-        jdk 'JDK 21'
-        nodejs 'NodeJS 20' // Dành cho web-app
+        maven 'maven'
+        // jdk 'jdk21'
+        // nodejs 'node20'
     }
 
     stages {
@@ -15,17 +14,16 @@ pipeline {
             }
         }
 
-        // Build commonservice trước vì các service khác có thể phụ thuộc vào nó
+        // Build commonservice trước vì các service khác phụ thuộc vào nó
         stage('Build Commonservice') {
             steps {
                 dir('commonservice') {
-                    // Cài đặt vào local maven repository (.m2) để các service khác có thể dùng
                     sh 'mvn clean install -DskipTests'
                 }
             }
         }
 
-        // Build các backend service song song để tiết kiệm thời gian
+        // Build các backend service song song
         stage('Build Backend Services') {
             parallel {
                 stage('apigateway') {
@@ -94,7 +92,7 @@ pipeline {
         stage('Setup Chatbot Platform') {
             steps {
                 dir('chatbot-platform') {
-                    // Chạy cài đặt thư viện Python (yêu cầu Jenkins có sẵn môi trường Python/pip)
+       
                     sh 'pip install -r requirements.txt'
                 }
             }
@@ -104,14 +102,13 @@ pipeline {
     post {
         always {
             echo 'Pipeline finished!'
-            // Có thể thêm bước dọn dẹp workspace hoặc gửi thông báo tại đây
-            // cleanWs()
+            // cleanWs() // Bỏ comment dòng này nếu muốn tự động xóa file sau khi build xong cho nhẹ máy
         }
         success {
             echo 'Build Successful!'
         }
         failure {
-            echo 'Build Failed!'
+            echo 'Build Failed! Vui lòng kiểm tra lại log.'
         }
     }
 }

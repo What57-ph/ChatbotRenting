@@ -12,6 +12,7 @@ import com.chatbot_renting.subscriptionservice.mapper.*;
 import com.chatbot_renting.subscriptionservice.repository.*;
 import com.chatbot_renting.subscriptionservice.service.SubscriptionService;
 import com.chatbot_renting.subscriptionservice.utils.PlanUtils;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     @Transactional
-    public SubscriptionCreateResponse createSubscription(Long userId, SubscriptionCreateRequest request) {
+    public SubscriptionCreateResponse createSubscription(UUID userId, SubscriptionCreateRequest request) {
         log.info("Starting createSubscription - userId={}, planId={}, billingCycle={}",
                 userId, request.getPlanId(), request.getBillingCycle());
         try {
@@ -141,7 +142,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public CurrentSubscriptionResponse getCurrentSubscription(Long userId) {
+    public CurrentSubscriptionResponse getCurrentSubscription(UUID userId) {
         log.info("Starting getCurrentSubscription - userId={}", userId);
         try {
             List<Subscription> subs = subscriptionRepository.findByUserIdAndStatusIn(userId,
@@ -183,7 +184,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public SubscriptionDto getSubscriptionByUserId(Long userId) {
+    public SubscriptionDto getSubscriptionByUserId(UUID userId) {
         log.info("Starting getSubscriptionByUserId - userId={}", userId);
         try {
             List<Subscription> subs = subscriptionRepository.findByUserIdAndStatusIn(userId,
@@ -202,7 +203,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     @Transactional
-    public SubscriptionDto cancelSubscription(Long userId) {
+    public SubscriptionDto cancelSubscription(UUID userId) {
         log.info("Starting cancelSubscription - userId={}", userId);
         try {
             List<Subscription> subs = subscriptionRepository.findByUserIdAndStatusIn(userId,
@@ -238,7 +239,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     @Transactional
-    public SubscriptionCreateResponse upgradeSubscription(Long userId, SubscriptionUpgradeRequest request) {
+    public SubscriptionCreateResponse upgradeSubscription(UUID userId, SubscriptionUpgradeRequest request) {
         log.info("Starting upgradeSubscription - userId={}, planId={}, billingCycle={}",
                 userId, request.getPlanId(), request.getBillingCycle());
         try {
@@ -315,7 +316,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     @Transactional
-    public SubscriptionDto downgradeSubscription(Long userId, SubscriptionDowngradeRequest request) {
+    public SubscriptionDto downgradeSubscription(UUID userId, SubscriptionDowngradeRequest request) {
         log.info("Starting downgradeSubscription - userId={}, planId={}", userId, request.getPlanId());
         try {
             List<Subscription> subs = subscriptionRepository.findByUserIdAndStatusIn(userId,
@@ -352,7 +353,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     @Transactional
-    public SubscriptionDto toggleAutoRenew(Long userId, SubscriptionAutoRenewRequest request) {
+    public SubscriptionDto toggleAutoRenew(UUID userId, SubscriptionAutoRenewRequest request) {
         log.info("Starting toggleAutoRenew - userId={}, autoRenew={}", userId, request.getAutoRenew());
         try {
 
