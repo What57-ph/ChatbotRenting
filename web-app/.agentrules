@@ -1,0 +1,5 @@
+# Frontend (web-app) Agent Rules
+
+- **Verification Strategy**: When finishing a screen/task, strictly prefer running `npm run dev` (and verify localhost:3000 manually if needed), INSTEAD OF `npm run build`. 
+  Lý do: Để tiết kiệm thời gian chờ tải, hạn chế lỗi compile type script nghiêm ngặt gây kẹt luồng của phiên làm việc.
+- **Git Context:** Always remember node_modules are excluded. When pushing UI updates, commit `add: <Task Name>` locally to branch `dev`.
