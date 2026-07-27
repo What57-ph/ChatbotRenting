@@ -79,24 +79,24 @@ pipeline {
         }
 
         // Build Frontend (Next.js)
-        stage('Build Web App') {
-            steps {
-                dir('web-app') {
-                    sh 'npm install'
-                    sh 'npm run build'
-                }
-            }
-        }
+        // stage('Build Web App') {
+        //     steps {
+        //         dir('web-app') {
+        //             sh 'npm install'
+        //             sh 'npm run build'
+        //         }
+        //     }
+        // }
 
         // Build Chatbot Platform (Python)
-        stage('Setup Chatbot Platform') {
-            steps {
-                dir('chatbot-platform') {
+        // stage('Setup Chatbot Platform') {
+        //     steps {
+        //         dir('chatbot-platform') {
        
-                    sh 'pip install -r requirements.txt'
-                }
-            }
-        }
+        //             sh 'pip install -r requirements.txt'
+        //         }
+        //     }
+        // }
     }
 
     post {
