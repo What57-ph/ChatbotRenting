@@ -1,4 +1,4 @@
-package com.lecture_mind.authservice;
+package com.chatbot_renting.authservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

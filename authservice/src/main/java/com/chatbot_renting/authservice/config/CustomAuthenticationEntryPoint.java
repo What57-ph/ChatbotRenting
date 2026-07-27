@@ -2,7 +2,7 @@ package com.chatbot_renting.authservice.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.lecturemind.commonservice.domain.Response.ResponseBuilder;
+import com.chatbot_renting.commonservice.domain.Response.ResponseBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

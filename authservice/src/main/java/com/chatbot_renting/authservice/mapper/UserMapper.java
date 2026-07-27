@@ -1,8 +1,8 @@
 package com.chatbot_renting.authservice.mapper;
 
 import com.chatbot_renting.authservice.entity.User;
-import com.lecturemind.commonservice.domain.Request.ReqLoginDTO;
-import com.lecturemind.commonservice.domain.Response.ResLoginDTO;
+import com.chatbot_renting.commonservice.domain.Request.ReqLoginDTO;
+import com.chatbot_renting.commonservice.domain.Response.ResLoginDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

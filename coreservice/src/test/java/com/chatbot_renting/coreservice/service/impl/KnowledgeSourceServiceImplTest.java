@@ -25,6 +25,7 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -46,9 +47,9 @@ class KnowledgeSourceServiceImplTest {
     private KnowledgeSource knowledgeSource;
     private KnowledgeSourceRequestWrapper textRequest;
 
-    private final Long USER_ID = 1L;
-    private final Long BOT_ID = 100L;
-    private final Long SOURCE_ID = 200L;
+    private final UUID USER_ID = UUID.randomUUID();
+    private final UUID BOT_ID = UUID.randomUUID();
+    private final UUID SOURCE_ID = UUID.randomUUID();
 
     @BeforeEach
     void setUp() {
