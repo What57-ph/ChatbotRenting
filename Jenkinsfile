@@ -4,7 +4,7 @@ pipeline {
     tools {
         maven 'maven'
         // jdk 'jdk21'
-        // nodejs 'node20'
+        nodejs 'node20' // Đã bỏ comment dòng này
     }
 
     stages {
@@ -78,21 +78,20 @@ pipeline {
             }
         }
 
-        // Build Frontend (Next.js)
-        // stage('Build Web App') {
-        //     steps {
-        //         dir('web-app') {
-        //             sh 'npm install'
-        //             sh 'npm run build'
-        //         }
-        //     }
-        // }
+        // Build Frontend (Next.js) - Đã bỏ comment toàn bộ block này
+        stage('Build Web App') {
+            steps {
+                dir('web-app') {
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
+            }
+        }
 
         // Build Chatbot Platform (Python)
         // stage('Setup Chatbot Platform') {
         //     steps {
         //         dir('chatbot-platform') {
-       
         //             sh 'pip install -r requirements.txt'
         //         }
         //     }
@@ -102,7 +101,6 @@ pipeline {
     post {
         always {
             echo 'Pipeline finished!'
-            // cleanWs() // Bỏ comment dòng này nếu muốn tự động xóa file sau khi build xong cho nhẹ máy
         }
         success {
             echo 'Build Successful!'
