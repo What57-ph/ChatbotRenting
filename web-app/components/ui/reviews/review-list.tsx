@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar} from "@/components/ui/avatar"
 import { StarRating } from "./star-rating"
 
 export type Review = {
@@ -52,11 +52,10 @@ export function ReviewList({ title, reviews, activeTab }: ReviewListProps) {
           <div key={review.id} className="flex flex-col gap-4 p-5 rounded-xl border border-border/60 bg-muted/20">
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-start gap-4">
-                <Avatar className="h-10 w-10 border border-border">
-                  <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-                    {review.authorName.charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
+                <Avatar 
+                  className="h-10 w-10 border border-border bg-primary/10 text-primary font-semibold"
+                  fallback={review.authorName.charAt(0)}
+                />
                 <div className="grid gap-1">
                   <div className="flex items-center gap-2">
                     <span className="font-semibold text-sm">{review.authorName}</span>

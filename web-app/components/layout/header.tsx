@@ -65,10 +65,10 @@ export function Header() {
 
           <div className="flex items-center gap-3 border-l border-border/50 pl-3 sm:pl-6 ml-1 sm:ml-0">
             <div className="hidden sm:flex flex-col items-end">
-              <span className="text-sm font-medium leading-none text-zinc-200">{user?.username || "Admin"}</span>
+              <span className="text-sm font-medium leading-none text-zinc-200">{user?.name || "Admin"}</span>
               <span className="text-xs text-muted-foreground mt-1">{user?.role || "System Operator"}</span>
             </div>
-            <Avatar alt={user?.username || "AD"} status="online" />
+            <Avatar alt={user?.name || "AD"} status="online" />
           </div>
         </div>
       </header>
