@@ -114,7 +114,6 @@ pipeline {
     post {
         always {
             echo 'Pipeline finished!'
-            // cleanWs() // Bỏ comment dòng này nếu muốn tự động xóa file sau khi build xong cho nhẹ máy
         }
         success {
             echo 'Build & Deploy Successful!'
