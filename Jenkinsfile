@@ -1,26 +1,21 @@
 pipeline {
     agent any
-
     environment {
-
         VERCEL_TOKEN = credentials('VERCEL_TOKEN')
         VERCEL_ORG_ID = credentials('VERCEL_ORG_ID')
         VERCEL_PROJECT_ID = credentials('VERCEL_PROJECT_ID')
     }
-
     tools {
         maven 'maven'
         jdk 'jdk21'
         nodejs 'node20'
     }
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-
         // Build commonservice trước vì các service khác phụ thuộc vào nó
         stage('Build Commonservice') {
             steps {
@@ -29,7 +24,6 @@ pipeline {
                 }
             }
         }
-
         // Build các backend service song song để tiết kiệm thời gian
         stage('Build Backend Services') {
             parallel {
@@ -84,29 +78,23 @@ pipeline {
                 }
             }
         }
-
         // Deploy Frontend (Next.js) lên Vercel
-     // Deploy Frontend (Next.js) lên Vercel
         stage('Deploy Web App to Vercel') {
             steps {
                 dir('web-app') {
                     sh 'npm install'
                     sh 'rm -rf .vercel'
                     sh 'mkdir -p .vercel'
-                    sh """
-                    cat <<EOF > .vercel/project.json
-                    {
-                      "orgId": "${VERCEL_ORG_ID}",
-                      "projectId": "${VERCEL_PROJECT_ID}"
-                    }
-                    EOF
-                    """
+                    writeFile file: '.vercel/project.json', text: """{
+  "orgId": "${VERCEL_ORG_ID}",
+  "projectId": "${VERCEL_PROJECT_ID}"
+}
+"""
                     sh 'npx vercel build --prod --token=$VERCEL_TOKEN'
                     sh 'npx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN'
                 }
             }
         }
-
         // Build Chatbot Platform (Python)
         // stage('Setup Chatbot Platform') {
         //     steps {
@@ -116,7 +104,6 @@ pipeline {
         //     }
         // }
     }
-
     post {
         always {
             echo 'Pipeline finished!'
