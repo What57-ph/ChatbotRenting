@@ -85,11 +85,10 @@ pipeline {
                     sh 'npm install'
                     sh 'rm -rf .vercel'
                     sh 'mkdir -p .vercel'
-                    writeFile file: '.vercel/project.json', text: """{
-  "orgId": "${VERCEL_ORG_ID}",
-  "projectId": "${VERCEL_PROJECT_ID}"
-}
-"""
+
+                    sh '''
+                        printf '{\\n  "orgId": "%s",\\n  "projectId": "%s"\\n}\\n' "$VERCEL_ORG_ID" "$VERCEL_PROJECT_ID" > .vercel/project.json
+                    '''
                     sh 'npx vercel build --prod --token=$VERCEL_TOKEN'
                     sh 'npx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN'
                 }
