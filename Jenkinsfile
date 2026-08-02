@@ -81,7 +81,6 @@ pipeline {
         // Deploy Frontend (Next.js) lên Vercel
        stage('Deploy Web App to Vercel') {
             steps {
-                dir('web-app') {
                     sh 'npm install'
         
                     sh 'rm -rf .vercel'
@@ -104,9 +103,8 @@ pipeline {
                             --prebuilt \
                             --prod \
                             --token=$VERCEL_TOKEN
-                    '''
+                    '''    
                 }
-            }
         }
         // Build Chatbot Platform (Python)
         // stage('Setup Chatbot Platform') {
