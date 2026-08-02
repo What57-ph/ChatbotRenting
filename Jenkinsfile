@@ -89,13 +89,10 @@ pipeline {
         stage('Deploy Web App to Vercel') {
             steps {
                 dir('web-app') {
-
                     sh 'npm install'
-
+                    sh 'rm -rf .vercel'
                     sh 'npx vercel pull --yes --environment=production --token=$VERCEL_TOKEN'
-
                     sh 'npx vercel build --prod --token=$VERCEL_TOKEN'
-
                     sh 'npx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN'
                 }
             }
