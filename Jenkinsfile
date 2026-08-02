@@ -1,19 +1,21 @@
 pipeline {
     agent any
-
+    environment {
+        VERCEL_TOKEN = credentials('VERCEL_TOKEN')
+        VERCEL_ORG_ID = credentials('VERCEL_ORG_ID')
+        VERCEL_PROJECT_ID = credentials('VERCEL_PROJECT_ID')
+    }
     tools {
         maven 'maven'
-        // jdk 'jdk21'
-        nodejs 'node20' // Đã bỏ comment dòng này
+        jdk 'jdk21'
+        nodejs 'node20'
     }
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-
         // Build commonservice trước vì các service khác phụ thuộc vào nó
         stage('Build Commonservice') {
             steps {
@@ -22,8 +24,7 @@ pipeline {
                 }
             }
         }
-
-        // Build các backend service song song
+        // Build các backend service song song để tiết kiệm thời gian
         stage('Build Backend Services') {
             parallel {
                 stage('apigateway') {
@@ -77,17 +78,36 @@ pipeline {
                 }
             }
         }
-
-        // Build Frontend (Next.js) - Đã bỏ comment toàn bộ block này
-        stage('Build Web App') {
+        // Deploy Frontend (Next.js) lên Vercel
+       stage('Deploy Web App to Vercel') {
             steps {
                 dir('web-app') {
                     sh 'npm install'
-                    sh 'npm run build'
+        
+                    sh 'rm -rf .vercel'
+        
+                    sh '''
+                        npx vercel pull \
+                            --yes \
+                            --environment=production \
+                            --token=$VERCEL_TOKEN
+                    '''
+        
+                    sh '''
+                        npx vercel build \
+                            --prod \
+                            --token=$VERCEL_TOKEN
+                    '''
+        
+                    sh '''
+                        npx vercel deploy \
+                            --prebuilt \
+                            --prod \
+                            --token=$VERCEL_TOKEN
+                    '''
                 }
             }
         }
-
         // Build Chatbot Platform (Python)
         // stage('Setup Chatbot Platform') {
         //     steps {
@@ -97,16 +117,15 @@ pipeline {
         //     }
         // }
     }
-
     post {
         always {
             echo 'Pipeline finished!'
         }
         success {
-            echo 'Build Successful!'
+            echo 'Build & Deploy Successful!'
         }
         failure {
-            echo 'Build Failed! Vui lòng kiểm tra lại log.'
+            echo 'Build Failed! Vui lòng kiểm tra lại log trên Jenkins.'
         }
     }
 }
