@@ -79,18 +79,32 @@ pipeline {
             }
         }
         // Deploy Frontend (Next.js) lên Vercel
-        stage('Deploy Web App to Vercel') {
+       stage('Deploy Web App to Vercel') {
             steps {
                 dir('web-app') {
                     sh 'npm install'
+        
                     sh 'rm -rf .vercel'
-                    sh 'mkdir -p .vercel'
-
+        
                     sh '''
-                        printf '{\\n  "orgId": "%s",\\n  "projectId": "%s"\\n}\\n' "$VERCEL_ORG_ID" "$VERCEL_PROJECT_ID" > .vercel/project.json
+                        npx vercel pull \
+                            --yes \
+                            --environment=production \
+                            --token=$VERCEL_TOKEN
                     '''
-                    sh 'npx vercel build --prod --token=$VERCEL_TOKEN'
-                    sh 'npx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN'
+        
+                    sh '''
+                        npx vercel build \
+                            --prod \
+                            --token=$VERCEL_TOKEN
+                    '''
+        
+                    sh '''
+                        npx vercel deploy \
+                            --prebuilt \
+                            --prod \
+                            --token=$VERCEL_TOKEN
+                    '''
                 }
             }
         }
