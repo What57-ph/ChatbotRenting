@@ -93,14 +93,14 @@ pipeline {
                     sh 'npm install'
                     sh 'rm -rf .vercel'
                     sh 'mkdir -p .vercel'
-                    sh '''
+                    sh """
                     cat <<EOF > .vercel/project.json
                     {
                       "orgId": "${VERCEL_ORG_ID}",
                       "projectId": "${VERCEL_PROJECT_ID}"
                     }
                     EOF
-                    '''
+                    """
                     sh 'npx vercel build --prod --token=$VERCEL_TOKEN'
                     sh 'npx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN'
                 }
