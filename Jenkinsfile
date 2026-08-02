@@ -1,10 +1,17 @@
 pipeline {
     agent any
 
+    environment {
+
+        VERCEL_TOKEN = credentials('VERCEL_TOKEN')
+        VERCEL_ORG_ID = credentials('VERCEL_ORG_ID')
+        VERCEL_PROJECT_ID = credentials('VERCEL_PROJECT_ID')
+    }
+
     tools {
         maven 'maven'
-        // jdk 'jdk21'
-        // nodejs 'node20'
+        jdk 'jdk21'
+        nodejs 'node20'
     }
 
     stages {
@@ -23,7 +30,7 @@ pipeline {
             }
         }
 
-        // Build các backend service song song
+        // Build các backend service song song để tiết kiệm thời gian
         stage('Build Backend Services') {
             parallel {
                 stage('apigateway') {
@@ -78,21 +85,26 @@ pipeline {
             }
         }
 
-        // Build Frontend (Next.js)
-        // stage('Build Web App') {
-        //     steps {
-        //         dir('web-app') {
-        //             sh 'npm install'
-        //             sh 'npm run build'
-        //         }
-        //     }
-        // }
+        // Deploy Frontend (Next.js) lên Vercel
+        stage('Deploy Web App to Vercel') {
+            steps {
+                dir('web-app') {
+
+                    sh 'npm install'
+
+                    sh 'npx vercel pull --yes --environment=production --token=$VERCEL_TOKEN'
+
+                    sh 'npx vercel build --prod --token=$VERCEL_TOKEN'
+
+                    sh 'npx vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN'
+                }
+            }
+        }
 
         // Build Chatbot Platform (Python)
         // stage('Setup Chatbot Platform') {
         //     steps {
         //         dir('chatbot-platform') {
-       
         //             sh 'pip install -r requirements.txt'
         //         }
         //     }
@@ -105,10 +117,10 @@ pipeline {
             // cleanWs() // Bỏ comment dòng này nếu muốn tự động xóa file sau khi build xong cho nhẹ máy
         }
         success {
-            echo 'Build Successful!'
+            echo 'Build & Deploy Successful!'
         }
         failure {
-            echo 'Build Failed! Vui lòng kiểm tra lại log.'
+            echo 'Build Failed! Vui lòng kiểm tra lại log trên Jenkins.'
         }
     }
 }
